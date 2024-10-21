@@ -1,0 +1,14 @@
+.map {
+  width: 100%;
+  height: 100vh;
+
+}
+
+.map1{
+ background-image: url("https://img.freepik.com/foto-gratis/lago-rodeado-paisaje-rocoso_23-2148215246.jpg?t=st=1729541023~exp=1729544623~hmac=d5eeabe7ddd4c5bb1d3bff6473a4c50af9e56cf2dc892b7a840b9194df8e159f&w=996");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+
+}
