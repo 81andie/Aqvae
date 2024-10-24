@@ -1,25 +1,12 @@
-<div class="map" *ngIf="!isPortadaVisible" >
-
-
-
+<div #mapDiv class="map-container" *ngIf="!isCoverPageVisible">
 </div>
 
-<div *ngIf="!isPortadaVisible"  >
+<div *ngIf="!isCoverPageVisible">
   <app-sidenav></app-sidenav>
 </div>
 
 
-<div class="map1 flex justify-center items-center" *ngIf="isPortadaVisible"  >
+<div class="map1 flex  w-full h-screen justify-center items-center" *ngIf="isCoverPageVisible">
 
-  <button class="w-20 h-8 bg-blue-200 rounded-md" (click)="esVisible()">Entra</button>
-
-  </div>
-
-
-
-
-
-
-
-
-
+  <button class="w-20 h-8 bg-blue-200 rounded-md" (click)="isVisible()">Entra</button>
+</div>
