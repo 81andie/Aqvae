@@ -1,3 +1,4 @@
+
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SidenavComponent } from "../sidenav/sidenav.component";
@@ -16,8 +17,12 @@ import { PlacesService } from '../../services/places.service';
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
+  private map!: Map;
+
   public estacions: Features[] = [];
   public estaciName: string[] = [];
+  public markers: { coordinates: [number, number]; name: string }[] = [];
+
 
   constructor(private cdr: ChangeDetectorRef,
     private placesService: PlacesService
@@ -62,14 +67,16 @@ export class MapComponent implements OnInit, AfterViewInit {
   initMap() {
 
     if (this.mapDivElement) {
-      const map = new Map({
+      this.map = new Map({
         container: this.mapDivElement.nativeElement, // container ID
         // style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        pitch: 55,
-        // bearing: 10,
+        pitch: 42,
+        bearing: 5,
         style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
+        // style: 'mapbox://styles/mapbox/standard',
         center: [2.527139561879901, 41.979429631974604],// starting position [lng, lat]
-        zoom: 13,
+        zoom: 6,
+
         projection: 'globe',
         accessToken: environment.apiKey,
       });
@@ -94,19 +101,66 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getCoordinates(estaci:string) {
+  getCoordinates(estaci: string) {
     this.placesService.getCoordinates(estaci).subscribe({
       next: (data) => {
-       console.log(data)
+        // console.log(data.features[0].center);
+        console.log(data)
+        //let coordinates = data.features[0].center;
+
+        let coordinates: [number, number];
+
+        // Verificar si es "Vilanova de Sau" y usar el center de la posición 2
+        if (estaci.toLowerCase().includes("vilanova de sau") && data.features.length > 2) {
+          coordinates = data.features[2].center;
+          console.log('Usando coordenadas de features[2] para Vilanova de Sau:', coordinates);
+        } else {
+          // Para los demás, usar el center de la posición 0
+          coordinates = data.features[0].center;
+          console.log('Usando coordenadas de features[0]:', coordinates);
+        }
+
+
+
+
+
+
+        this.addMarker(coordinates, estaci)
 
       },
+
+
       error: (err) => console.error('Error al obtener datos:', err)
     });
   }
 
+  addMarker(coordinates: [number, number], name: string) {
+
+    const marker = new Marker()
+      .setLngLat(coordinates)
+      .setPopup(new Popup().setHTML(`<h3>${name}</h3>`))
+      .addTo(this.map);
+
+      marker.getElement().addEventListener('click', () => {
+        this.flyTo(coordinates, name);  // Llama a flyTo al hacer clic en el marcador
+    });
+  }
+
+  flyTo(coordinates: [number, number], name: string) {
+    this.map?.flyTo({
+      zoom: 15,
+      center: coordinates,
+      speed: 0.4,    // Velocidad del vuelo (ajustable)
+      curve: 1.9,    // Curva del vuelo para hacerlo más suave
+      essential: true
+    })
+  }
+
+
 
 
 }
+
 
 
 
