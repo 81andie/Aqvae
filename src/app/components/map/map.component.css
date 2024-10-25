@@ -1,17 +1,12 @@
 .map-container {
   width: 100%;
   height: 100vh;
-  
+
 }
 
 .map1{
-
  background-size: cover;
  background-position: top;
-
  background-image: url("https://img.freepik.com/foto-gratis/lavandera-verde-tringa-ochropus_181624-3037.jpg?t=st=1729602865~exp=1729606465~hmac=cd2943f1f65f8db4d92acdaced07083800f4a6f9cef8b14b35055d86896f12ef&w=826");
-  background-repeat: no-repeat;
-
-
-
+ background-repeat: no-repeat;
 }
