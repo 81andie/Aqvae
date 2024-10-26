@@ -1,9 +1,9 @@
 export interface Features {
   dia:                        Date;
   estaci:                     Estaci;
-  nivell_absolut:             string;
-  percentatge_volum_embassat: string;
-  volum_embassat:             string;
+  nivell_absolut?:             string;
+  percentatge_volum_embassat?: string;
+  volum_embassat?:             string;
 }
 
 export enum Estaci {

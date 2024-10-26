@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { map, Observable, tap } from "rxjs";
 import { Estaci, Features } from '../interfaces/features.interface';
+
+
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -10,6 +12,9 @@ import { HttpClient } from "@angular/common/http";
 export class PlacesService {
 
   public estacions: Features[] = [];
+
+
+
   public estaciName: string[] = [];
 
   private apiUrl = "https://analisi.transparenciacatalunya.cat/resource/gn9e-3qhr.json";
@@ -24,11 +29,11 @@ export class PlacesService {
       )
   }
 
+
   getEstaci(): Observable<string[]> {
     return this.getLocations().pipe(
       map(data => {
         const filteredEstacions = data.map(estacion => estacion.estaci)
-
         this.estaciName = [...new Set(filteredEstacions)];
         console.log(this.estaciName);
         return this.estaciName;
@@ -42,9 +47,12 @@ export class PlacesService {
   }
 
 
+  getMesures(): Observable<{ [fecha: string]: { [estaci: string]: Features } }> {
+
+    return this.http.get
 
 
-
+  }
 }
 
 

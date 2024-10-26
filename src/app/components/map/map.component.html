@@ -1,5 +1,12 @@
 <div #mapDiv class="map-container" *ngIf="!isCoverPageVisible">
+
+<div class="container prueba w-72 h-12 bg-blue-100 p-2 mt-2 rounded-sm">
+<app-selectors></app-selectors>
 </div>
+</div>
+
+
+
 
 <div *ngIf="!isCoverPageVisible">
   <app-sidenav></app-sidenav>
@@ -7,6 +14,5 @@
 
 
 <div class="map1 flex  w-full h-screen justify-center items-center" *ngIf="isCoverPageVisible">
-
   <button class="w-20 h-8 bg-blue-200 rounded-md" (click)="isVisible()">Entra</button>
 </div>

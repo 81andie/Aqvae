@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { MapComponent } from "./components/map/map.component";
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { SelectorsComponent } from "./components/selectors/selectors.component";
 
 
 @Component({
@@ -15,8 +16,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     HeaderComponent,
     MapComponent,
     SidenavComponent,
-
-  ],
+    SelectorsComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
