@@ -60,6 +60,17 @@ export class SelectorsComponent implements OnInit {
     }
   }
 
+  allWaterDams(): string[] {
+    const waterDams = new Set<string>();
+    // Extraer todos los embalses de las fechas disponibles
+    for (const date in this.embalsesData) {
+      for (const dam in this.embalsesData[date]) {
+        waterDams.add(dam);
+      }
+    }
+    return Array.from(waterDams);
+  }
+
 
 
 
