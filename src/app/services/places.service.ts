@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, Observable, Subject, tap } from "rxjs";
+import {  map, Observable,  tap } from "rxjs";
 import { Estaci, Features } from '../interfaces/features.interface';
 
 
@@ -17,7 +17,7 @@ export class PlacesService {
   private apiUrl = "https://analisi.transparenciacatalunya.cat/resource/gn9e-3qhr.json";
 
 
-  public measurementsSubject = new Subject<any>();
+
   constructor(private http: HttpClient) { }
 
 
@@ -47,53 +47,38 @@ export class PlacesService {
     return this.http.get<any>(apiUrl);
   }
 
+  getUniqueDates(): Observable<string[]>{
 
-  getMesures(): Observable<{ [fecha: string]: { [estaci: string]: Features } }> {
-
-    return this.http.get<Features[]>(this.apiUrl).pipe(
-      map(data => {
-        const organizedData: { [fecha: string]: { [estaci: string]: Features } } = {};
-
-        data.forEach(mesure => {
-
-          const date = new Date(mesure.dia);
-          const fecha = `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
-
-          if (!mesure.nivell_absolut || !mesure.percentatge_volum_embassat || !mesure.volum_embassat) {
-            return; // Excluir datos incompletos
-          }
-
-          if (!organizedData[fecha]) {
-            organizedData[fecha] = {};
-          }
-
-          organizedData[fecha][mesure.estaci] = mesure;
-
-
-        });
-
-       // console.log('Datos organizados por fecha y pantano:', organizedData);
-        return organizedData;
-
-      }),
-
-      tap(organizedData => console.log('Datos procesados:', organizedData))
-
+    return this.getLocations().pipe(
+      map(data=>{
+        const dates = data.map(item => item.dia.toString());
+        return Array.from(new Set(dates))
+      })
     )
+  }
 
+  getAvailableEstacionsByDate(selectedDate: string): Observable<string[]> {
+    return this.getLocations().pipe(
+      map(data => {
+        return data
+          .filter(estacion => {
+            // Convertir la fecha 'dia' a formato YYYY-MM-DD para comparación
+            const stationDate = new Date(estacion.dia).toISOString().split('T')[0];
+            const selectedDateFormatted = new Date(selectedDate).toISOString().split('T')[0]; // Asegúrate de que ambas fechas estén en el mismo formato
+
+            console.log(`Comparando: ${stationDate} === ${selectedDateFormatted}`); // Verifica la comparación
+            return stationDate === selectedDateFormatted; // Compara solo la parte de la fecha
+          })
+          .map(estacion => estacion.estaci); // Devuelve solo los nombres de las estaciones
+      })
+    );
+  }
+
+  public getMeasurements(date: string, waterDam: string): Observable<any[]> {
+    console.log(`Obteniendo mediciones para la fecha: ${date} y el pantano: ${waterDam}`);
+    return this.http.get<any[]>(`${this.apiUrl}/measurements?date=${date}&waterDam=${waterDam}`);
   }
 
 
-  updateMeasurements(selectedDate: string, selectedWaterDam: string) {
-    this.getMesures().subscribe(measures => {
-      if (measures[selectedDate] && measures[selectedDate][selectedWaterDam]) {
-        const filteredMeasurements = [measures[selectedDate][selectedWaterDam]];
-        this.measurementsSubject.next(filteredMeasurements); // Emitir el array de medidas filtradas
-      } else {
-        this.measurementsSubject.next([]); // Emitir un array vacío si no hay datos
-      }
-    });
-
-  }
 
 }

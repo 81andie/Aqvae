@@ -1,23 +1,16 @@
-
 <form [formGroup]="myForm">
-<div class="flex flex-row selector justify-evenly rounded-sm" >
-  <select name="select"  formControlName="date" class="ml-2 p-2 rounded-sm drop-shadow-xl ">
-    <option value="">-- Seleccioni una data --</option>
-    <option  *ngFor="let date of embalsesData | keyvalue" [value]="date.key" selected>{{date.key}}</option>
+  <div class="flex flex-row selector justify-evenly rounded-sm">
+    <select name="select" formControlName="date" id="date" class="ml-2 p-2 rounded-sm drop-shadow-xl ">
+      <option>-- Seleccioni una data --</option>
+      <option *ngFor="let fecha of fechas" [value]="fecha" selected>{{fecha | date:'dd/MM/yyyy' }}</option>
 
-  </select>
+    </select>
 
-  <select name="select"  formControlName="waterDam" id="waterDam"class="  ml-2 drop-shadow-xl shadow-blue-300">
-   
-      <option value="">-- Seleccione un embalse --</option>
-      <option *ngFor="let embalse of allWaterDams()" [value]="embalse">{{ embalse }}</option>
+    <select name="select" (change)="onWaterDamChange($event)"  formControlName="waterDam" id="waterDam"  class="  ml-2 drop-shadow-xl shadow-blue-300">
+      <option *ngFor="let dam of estacions" [value]="dam">{{dam}}</option>
 
 
-  </select>
-</div>
+    </select>
+  </div>
 
 </form>
-
-
-
-

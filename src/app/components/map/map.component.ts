@@ -77,7 +77,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.placesService.getEstaci().subscribe({
       next: (estaci) => {
         this.estaciName = estaci; // Asigna la lista filtrada a la propiedad del componente
-        console.log(this.estaciName);
+       // console.log(this.estaciName);
         this.estaciName.forEach(estaci => {
         this.getCoordinates(estaci);
         });
@@ -91,7 +91,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.placesService.getCoordinates(estaci).subscribe({
       next: (data) => {
         // console.log(data.features[0].center);
-        console.log(data)
+      // console.log(data)
         //let coordinates = data.features[0].center;
 
         let coordinates: [number, number];
@@ -99,11 +99,11 @@ export class MapComponent implements OnInit, AfterViewInit {
         // Verificar si es "Vilanova de Sau" y usar el center de la posición 2
         if (estaci.toLowerCase().includes("vilanova de sau") && data.features.length > 2) {
           coordinates = data.features[2].center;
-          console.log('Usando coordenadas de features[2] para Vilanova de Sau:', coordinates);
+          //console.log('Usando coordenadas de features[2] para Vilanova de Sau:', coordinates);
         } else {
           // Para los demás, usar el center de la posición 0
           coordinates = data.features[0].center;
-          console.log('Usando coordenadas de features[0]:', coordinates);
+         // console.log('Usando coordenadas de features[0]:', coordinates);
         }
 
         this.addMarker(coordinates, estaci)

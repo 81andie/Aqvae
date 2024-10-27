@@ -8,11 +8,11 @@
 
 
   <div class="flex flex-wrap md:flex-wrap sm:flex-wrap  items-center justify-evenly ">
-    <ng-container *ngIf="(measurements$ | async) as measurements">
-    <div *ngFor="let measurement of measurements"  class="w-24 h-24 rounded-md flex flex-wrap justify-center items-start " >
+    <ng-container >
+    <div  class="w-24 h-24 rounded-md flex flex-wrap justify-center items-start " >
       <div class="w-22 h-22 rounded-md flex justify-center items-center ">
         <div class="w-20 h-20 gota m-3 rounded-full">
-          <div class="text-center mt-3 text-xs ">{{measurement.dia | date}}</div>
+          <div class="text-center mt-3 text-xs "></div>
 
           <div class="wave"></div>
           <div class="wave1"></div>
@@ -25,11 +25,11 @@
 
 
 
-    <div *ngFor="let measurement of measurements" class="w-24 h-24  rounded-md flex flex-wrap justify-center items-start" >
+    <div  class="w-24 h-24  rounded-md flex flex-wrap justify-center items-start" >
       <div class="w-22 h-22 rounded-md flex justify-center items-center m-1">
         <div class="w-20 h-20 gota m-3 rounded-full">
 
-          <div class="text-center mt-2 text-xs ">{{ measurement.estaci }}</div>
+          <div class="text-center mt-2 text-xs "></div>
           <div class="wave"></div>
           <div class="wave1"></div>
           <div class="wave2"></div>

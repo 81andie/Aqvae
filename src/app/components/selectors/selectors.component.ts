@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlacesService } from '../../services/places.service';
 import { Features } from '../../interfaces/features.interface';
@@ -13,23 +13,27 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './selectors.component.css'
 })
 export class SelectorsComponent implements OnInit {
+
+  public fechas: string[] = [];
+  public estacionsDisponibles: string[] = [];
+  public estacions: string[] = [];
+  @Output() measurementSelected = new EventEmitter<any[]>();
+
   constructor(private placesService: PlacesService,
               private fb:FormBuilder
   ) { }
 
 
-  public embalsesData: { [fecha: string]: { [estaci: string]: any } } = {};
-  public selectedEstaciones: { [estaci: string]: any } = {};
-
-
-
   ngOnInit(): void {
-  this.getMesures();
-  this.myForm.get('date')?.valueChanges.subscribe(() => this.onSelectionChange());
-  this.myForm.get('waterDam')?.valueChanges.subscribe(() => this.onSelectionChange());
+  this.loadUniqueDates();
+  this.setupDateChangeListener();
+  this.onDateChange()
+
+}
 
 
-  }
+
+
 
   public myForm:FormGroup = this.fb.group({
     date:['', Validators.required],
@@ -38,41 +42,60 @@ export class SelectorsComponent implements OnInit {
 
 
 
-  getMesures() {
-
-  this.placesService.getMesures().subscribe(data =>{
-
-    this.embalsesData = data;
-   // console.log(this.embalsesData)
-  })
+   private loadUniqueDates(): void {
+    this.placesService.getUniqueDates().subscribe(fechas => {
+      console.log('Fechas únicas:', fechas);
+      this.fechas = fechas;
+    });
   }
 
-  onSelectionChange() {
-    const selectedDate = this.myForm.value.date;
-    const selectedWaterDam = this.myForm.value.waterDam;
-
-    console.log('Fecha seleccionada:', selectedDate);
-    console.log('Embalse seleccionado:', selectedWaterDam);
-
-    if (selectedDate && selectedWaterDam) {
-      this.placesService.updateMeasurements(selectedDate, selectedWaterDam);
-      console.log(this.placesService.updateMeasurements(selectedDate,selectedWaterDam))
-    }
+  private setupDateChangeListener() {
+    this.myForm.get('date')?.valueChanges.subscribe(selectedDate => {
+      this.loadAvailableEstacions(selectedDate);
+      console.log(this.loadAvailableEstacions)
+    });
   }
 
-  allWaterDams(): string[] {
-    const waterDams = new Set<string>();
-    // Extraer todos los embalses de las fechas disponibles
-    for (const date in this.embalsesData) {
-      for (const dam in this.embalsesData[date]) {
-        waterDams.add(dam);
+  private loadAvailableEstacions(selectedDate: string) {
+    this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
+      this.estacionsDisponibles = estacions;
+      console.log(this.estacionsDisponibles);
+    });
+  }
+
+
+  private onDateChange(): void {
+    this.myForm.get('date')?.valueChanges.subscribe(selectedDate => {
+      console.log('Fecha seleccionada:', selectedDate); // Para verificar la fecha seleccionada
+      if (selectedDate) {
+        this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
+          console.log('Estaciones disponibles:', estacions); // Verifica las estaciones que se devuelven
+          this.estacions = estacions;
+        });
+      } else {
+        this.estacions = []; // Limpia las estaciones si no hay fecha seleccionada
       }
-    }
-    return Array.from(waterDams);
+    });
+
   }
 
+  public onWaterDamChange(event:Event): void {
+    const selectElement = event.target as HTMLSelectElement; // Asegúrate de hacer el casting a HTMLSelectElement
+    const selectedDam = selectElement.value; // Obtén el valor directamente del select
+    const selectedDate = this.myForm.get('date')?.value;
 
+    console.log('Pantano seleccionado:', selectedDam); // Log del pantano seleccionado
+    console.log('Fecha seleccionada:', selectedDate); // Log de la fecha seleccionada
 
+    // Llama a la función que maneja la obtención de mediciones
+    this.onSelectMeasurement(selectedDate, selectedDam);
+  }
 
+  private onSelectMeasurement(date: string, waterDam: string): void {
+    this.placesService.getMeasurements(date, waterDam).subscribe(measurements => {
+      this.measurementSelected.emit(measurements); // Emitir las mediciones
+      console.log(this.measurementSelected); // Log de las mediciones obtenidas
+    });
+  }
 
 }

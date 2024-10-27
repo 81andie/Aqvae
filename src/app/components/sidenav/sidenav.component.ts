@@ -14,19 +14,13 @@ import { Features } from '../../interfaces/features.interface';
 })
 export class SidenavComponent  implements OnInit {
 
-  public measurements$ = new BehaviorSubject<Features[]>([]);
-mesurement: any;
+
   constructor(private PlacesService: PlacesService){}
 
   ngOnInit(): void {
-    this.PlacesService.measurementsSubject.subscribe((measurements) =>{
-      console.log('Mediciones recibidas:', measurements);
-      this.measurements$.next(measurements);
 
-    })
 
-  }
-
+    }
 
   public isSidebarVisible: boolean = false;
 
