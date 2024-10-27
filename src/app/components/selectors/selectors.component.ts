@@ -17,32 +17,33 @@ export class SelectorsComponent implements OnInit {
   public fechas: string[] = [];
   public estacionsDisponibles: string[] = [];
   public estacions: string[] = [];
+
   @Output() measurementSelected = new EventEmitter<any[]>();
 
   constructor(private placesService: PlacesService,
-              private fb:FormBuilder
+    private fb: FormBuilder
   ) { }
 
 
   ngOnInit(): void {
-  this.loadUniqueDates();
-  this.setupDateChangeListener();
-  this.onDateChange()
+    this.loadUniqueDates();
+    this.setupDateChangeListener();
+    this.onDateChange()
 
-}
-
-
+  }
 
 
 
-  public myForm:FormGroup = this.fb.group({
-    date:['', Validators.required],
-    waterDam :['', Validators.required]
+
+
+  public myForm: FormGroup = this.fb.group({
+    date: ['', Validators.required],
+    waterDam: ['', Validators.required]
   })
 
 
 
-   private loadUniqueDates(): void {
+  private loadUniqueDates(): void {
     this.placesService.getUniqueDates().subscribe(fechas => {
       console.log('Fechas únicas:', fechas);
       this.fechas = fechas;
@@ -79,7 +80,7 @@ export class SelectorsComponent implements OnInit {
 
   }
 
-  public onWaterDamChange(event:Event): void {
+  public onWaterDamChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement; // Asegúrate de hacer el casting a HTMLSelectElement
     const selectedDam = selectElement.value; // Obtén el valor directamente del select
     const selectedDate = this.myForm.get('date')?.value;
@@ -91,10 +92,14 @@ export class SelectorsComponent implements OnInit {
     this.onSelectMeasurement(selectedDate, selectedDam);
   }
 
+
   private onSelectMeasurement(date: string, waterDam: string): void {
-    this.placesService.getMeasurements(date, waterDam).subscribe(measurements => {
-      this.measurementSelected.emit(measurements); // Emitir las mediciones
-      console.log(this.measurementSelected); // Log de las mediciones obtenidas
+    // Aquí no necesitas establecer valores mínimos si no los quieres
+    const selectedDate = date.split('T')[0]; // Obtener solo la parte de la fecha
+
+    this.placesService.getMeasurements(selectedDate, waterDam).subscribe(measurements => {
+      this.placesService.emitMeasurements(measurements); // Emitir las mediciones
+      console.log('Mediciones obtenidas:', measurements);
     });
   }
 

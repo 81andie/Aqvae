@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import {  map, Observable,  tap } from "rxjs";
+import {  BehaviorSubject, map, Observable,  tap } from "rxjs";
 import { Estaci, Features } from '../interfaces/features.interface';
 
 
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,9 @@ export class PlacesService {
   public estaciName: string[] = [];
 
   private apiUrl = "https://analisi.transparenciacatalunya.cat/resource/gn9e-3qhr.json";
+
+  private measurementSubject = new BehaviorSubject<any[]>([]);
+  measurements$ = this.measurementSubject.asObservable();
 
 
 
@@ -74,9 +77,28 @@ export class PlacesService {
     );
   }
 
-  public getMeasurements(date: string, waterDam: string): Observable<any[]> {
-    console.log(`Obteniendo mediciones para la fecha: ${date} y el pantano: ${waterDam}`);
-    return this.http.get<any[]>(`${this.apiUrl}/measurements?date=${date}&waterDam=${waterDam}`);
+  public getMeasurements(date: string, waterDam: string, minAbsoluteLevel?: number, minVolumePercent?: number, minVolume?: number): Observable<Features[]> {
+    let params = new HttpParams()
+      .set("$where", `dia='${new Date(date).toISOString().split('T')[0]}' AND estaci='${waterDam}'`);
+
+    if (minAbsoluteLevel !== undefined) {
+      params = params.append("$where", `nivell_absolut > ${minAbsoluteLevel}`);
+    }
+    if (minVolumePercent !== undefined) {
+      params = params.append("$where", `percentatge_volum_embassat = ${minVolumePercent}`);
+    }
+    if (minVolume !== undefined) {
+      params = params.append("$where", `volum_embassat = ${minVolume}`);
+    }
+
+    console.log("Parametros de consulta:", params.toString()); // Log para verificar los parámetros
+
+    return this.http.get<Features[]>(this.apiUrl, { params });
+  }
+
+
+  emitMeasurements(measurements: any[]) {
+    this.measurementSubject.next(measurements);
   }
 
 
