@@ -12,7 +12,9 @@
     <div  class="w-32 h-32 rounded-md flex flex-wrap justify-center items-start " >
       <div class="w-22 h-22 rounded-md flex justify-center items-center ">
         <div class="w-28 h-28 gota m-3 rounded-full">
-          <div class="text-center mt-3 text-xs text-wrap">{{measure.dia | date}}</div>
+          <div class="text-center mt-8 text-wrap">
+            <span class="p-1 text-sm">{{measure.dia | date}}</span>
+          </div>
 
           <div class="wave" ></div>
           <div class="wave1" ></div>
@@ -29,8 +31,10 @@
       <div class="w-22 h-22 rounded-md flex justify-center items-center m-1">
         <div class="w-28 h-28 gota m-3 rounded-full">
 
-          <div class="text-center mt-5 estaci text-wrap">
-            <span>{{measure.estaci | slice:15:47}}</span>
+          <div class="mt-6 estaci text-wrap text-center">
+            <span class="p-1">Embalsament</span>
+            <br>
+            <span class="p-1 text-xs text-center">{{measure.estaci | slice:15:47}}</span>
           </div>
           <div class="wave"></div>
           <div class="wave1"></div>
@@ -45,10 +49,13 @@
       <div class="w-22 h-22 rounded-md flex justify-center items-center m-1">
         <div class="w-28 h-28 gota m-3 rounded-full">
 
-          <div class="text-center mt-2text-xl">{{measure.nivell_absolut}}</div>
+          <div class="text-center mt-3 text-xl">
+            <span class="p-1 text-xs">Nivell de l’aigua (msnm)</span>
+            <br>
+            <span class="text-base">{{measure.nivell_absolut}}</span></div>
           <div class="wave" ></div>
-          <div class="wave1" ></div>
-          <div class="wave2" ></div>
+          <div class="wave1"></div>
+          <div class="wave2"></div>
           <div class="w-2 h-2 gota m-3 rounded-full"></div>
           <div class="w-1 h-1  left-1 gota  m-3 rounded-full"></div>
         </div>
@@ -59,7 +66,11 @@
     <div class="w-32 h-32 rounded-md flex flex-wrap justify-center items-start " >
       <div class="w-22 h-22 rounded-md flex justify-center items-center m-1">
         <div class="w-28 h-28 gota m-3 rounded-full">
-          <div class="text-center mt-3 text-xs ">{{ measure.volum_embassat }} hm³</div>
+          <div class="text-center mt-5 text-xs">
+            <span class="p-1 text-xs">Percentatge de volum d’aigua</span>
+            <br>
+            <span class="mt-4 text-base">{{ measure.percentatge_volum_embassat }}%</span>
+          </div>
 
           <div class="wave"></div>
           <div class="wave1"></div>
@@ -70,11 +81,14 @@
       </div>
     </div>
 
-    <div class="w-24 h-24 rounded-md flex flex-wrap justify-center items-start " >
+    <div class="w-32 h-32 rounded-md flex flex-wrap justify-center items-start " >
       <div class="w-22 h-22 rounded-md flex justify-center items-center m-1">
-        <div class="w-20 h-20 gota m-3 rounded-full">
-          <div class="text-center mt-3 text-xs ">25/10/2024</div>
-          <div class="text-center mt-2text-xl ">Sau</div>
+        <div class="w-28 h-28 gota m-3 rounded-full">
+          <div class="text-center mt-5 text-xs">
+            <span class="p-1 text-xs">volum d'aigua (hm3)</span>
+            <br>
+            <span class="mt-4 text-base">{{ measure.volum_embassat}} hm3</span>
+          </div>
           <div class="wave"></div>
           <div class="wave1"></div>
           <div class="wave2"></div>
