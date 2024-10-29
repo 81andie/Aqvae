@@ -100,6 +100,46 @@ export class PlacesService {
   emitMeasurements(measurements: any[]) {
     this.measurementSubject.next(measurements);
   }
+ 
+
+  getMonthlyMeasurements():Observable<any[]>{
+    return this.getLocations().pipe(
+      map(data => this.groupMeasurementsByMonth(data))
+    );
+
+  }
+
+  private groupMeasurementsByMonth(data: Features[]):any[]{
+    const monthlyData: { [key: string]: { [key: string]: number } } = {};
+   data.forEach(item=>{
+    const date = new Date(item.dia);
+    const monthKey = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+    const estaci = item.estaci || "";
+    const volumPercentString = item.percentatge_volum_embassat;
+
+    const volumPercent = volumPercentString ? parseFloat(volumPercentString) : 0;
+
+// Verificar si volumPercent es un número válido
+    if (!isNaN(volumPercent)) {
+      // Inicializar el objeto para el mes si no existe
+      if (!monthlyData[monthKey]) {
+        monthlyData[monthKey] = {};
+      }
+
+      monthlyData[monthKey][estaci]=(monthlyData[monthKey][estaci] || 0) + volumPercent;
+
+    }else{
+      console.warn(`El valor de percentatge_volum_embassat no es válido para estaci: ${estaci}`);
+    }
+
+   });
+
+   return Object.keys(monthlyData).map(month => ({
+    month: month,
+    data: monthlyData[month]
+  }));
+
+  }
 
 
 
