@@ -7,12 +7,13 @@ import { environment } from '../../../environments/environment';
 import { Estaci, Features } from '../../interfaces/features.interface';
 import { PlacesService } from '../../services/places.service';
 import { SelectorsComponent } from "../selectors/selectors.component";
+import { SliderTransitionComponent } from '../slider-transition/slider-transition.component';
 
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, SelectorsComponent],
+  imports: [CommonModule, SidenavComponent, SelectorsComponent, SliderTransitionComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })

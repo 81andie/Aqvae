@@ -12,24 +12,14 @@
   <app-sidenav></app-sidenav>
 </div>
 
-<div class="map1 flex  w-full h-screen justify-center items-center" *ngIf="isCoverPageVisible">
+<div class="map1 flex w-full h-full" *ngIf="isCoverPageVisible">
 
-  <div class="container p-2">
-    <div class="title md:text-right">
-      <div class ="bg-transparent ">
-        <h1 class="text-white text-6xl md:text-9xl text-ellipsis ">Claustrum</h1>
-      </div>
-
-      <h1 class="text-white text-5xl">Aqvae</h1>
-      <h3 class="text-blue-100 bg-transparent text-1xl mt-2 text-wrap ">Medició dels Embassaments de Cataluña a temps Real</h3>
-      <button class="w-20 h-8 bg-blue-200 rounded-md mt-4 " (click)="isVisible()">Entra</button>
-    </div>
-  
-
-  </div>
-
-
-
-
+<div class="overlay">
+  <app-slider-transition/>
+  <h1 class="text-6xl">Claustrum</h1>
+  <h3 class="text-4xl text-center">Aqvae</h3>
+  <h6 class="text-1xl text-center">Medició a temps reals dels Embassaments de la Conca Mediterránea</h6>
+  <button class="w-20 mt-3 h-8 bg-blue-200 rounded-md " (click)="isVisible()">Entra</button>
+</div>
 </div>
 
