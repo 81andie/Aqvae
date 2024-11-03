@@ -43,6 +43,7 @@ export class DamStatsComponent implements OnInit{
       line: { shape: string; smoothing: number; }; // Estilo de línea suave
       marker: { size: number; };
     }[] = [];
+
     const estacions = Object.keys(data[0]?.data || {});
 
     // Recorre cada estación y genera un trace
@@ -78,7 +79,6 @@ export class DamStatsComponent implements OnInit{
 
     // Monta el gráfico en el contenedor
     Plotly.newPlot('myDiv', traces, layout, { responsive: true })
-
 
 
   }
