@@ -1,6 +1,6 @@
 
 <section class="slider">
-  <img [src]="images[currentIndex]" class="img w-screen h-screen object-cover"  />
+  <img [srcset]="images[currentIndex]" class="img w-screen h-screen object-cover "  />
 
 
 
@@ -14,7 +14,7 @@
  [src]="image"
  (click)="setCurrentIndex(i)"
  [class.selected]="i === currentIndex"
- class="w-16 h-16 object-cover cursor-pointer rounded-md border-2"
+ class="ml-2 w-16 h-16 object-cover cursor-pointer rounded-md border-2"
  [ngClass]="{ 'border-blue-500': i === currentIndex, 'border-transparent': i !== currentIndex }"
 
   />

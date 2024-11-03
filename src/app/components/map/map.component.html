@@ -1,6 +1,6 @@
 <div #mapDiv class="map-container" *ngIf="!isCoverPageVisible">
 
-  <div class="container prueba w-8/12/ h-10 sm:flex-column bg-blue-100 p-1 mt-2 rounded-sm">
+  <div class="container prueba w-6/12 h-10 sm:flex-column bg-blue-100 p-1 mt-2 rounded-sm">
     <app-selectors></app-selectors>
   </div>
 </div>
@@ -18,8 +18,17 @@
     <h6 class="text-1xl  text-amber-200 line-clamp-3  bg-blue-600  ">Medició a temps reals dels Embassaments de la Conca
       Mediterránea</h6>
     <h1 class=" text-5xl font-extrabold text-amber-300 drop-shadow-lg">Claustrum</h1>
-    <h3 class="text-5xl  text-blue-800 font-extrabold">Aqvae</h3>
-    <button class="w-20 ml-48 mt-3 h-8 bg-blue-200 rounded-md " (click)="isVisible()">Entra</button>
+    <h3 class="text-5xl  text-white font-extrabold">Aqvae</h3>
+    <button class="w-24 mt-3 h-9 p-1 bg-blue-600 rounded-md" (click)="isVisible()">
+
+     <span class="relative text-white font-boldh-3 w-3 ">
+      Entrar
+      <span class="animate-ping absolute inline-flex h-4 w-4 mt-2 rounded-full bg-red-600 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 mt-1 ml-1 bg-red-500"></span>
+    </span>
+
+
+      </button>
 
   </div>
 

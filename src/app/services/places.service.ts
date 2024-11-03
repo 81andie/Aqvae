@@ -11,6 +11,8 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 
 export class PlacesService {
 
+  
+
   public estacions: Features[] = [];
   public estaciName: string[] = [];
 
@@ -100,7 +102,7 @@ export class PlacesService {
   emitMeasurements(measurements: any[]) {
     this.measurementSubject.next(measurements);
   }
- 
+
 
   getMonthlyMeasurements():Observable<any[]>{
     return this.getLocations().pipe(
