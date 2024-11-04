@@ -1,6 +1,9 @@
 
 <section class="slider">
-  <img [srcset]="images[currentIndex]" class="img w-screen h-screen object-cover "  />
+  <img
+  [srcset]="images[currentIndex]"
+  class="img w-screen h-screen object-cover "
+  loading="lazy" />
 
 
 
