@@ -11,7 +11,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 
 export class PlacesService {
 
-  
+
 
   public estacions: Features[] = [];
   public estaciName: string[] = [];
@@ -71,7 +71,7 @@ export class PlacesService {
             const stationDate = new Date(estacion.dia).toISOString().split('T')[0];
             const selectedDateFormatted = new Date(selectedDate).toISOString().split('T')[0]; // Asegúrate de que ambas fechas estén en el mismo formato
 
-            console.log(`Comparando: ${stationDate} === ${selectedDateFormatted}`); // Verifica la comparación
+            //console.log(`Comparando: ${stationDate} === ${selectedDateFormatted}`); // Verifica la comparación
             return stationDate === selectedDateFormatted; // Compara solo la parte de la fecha
           })
           .map(estacion => estacion.estaci); // Devuelve solo los nombres de las estaciones
@@ -93,7 +93,7 @@ export class PlacesService {
       params = params.append("$where", `volum_embassat = ${minVolume}`);
     }
 
-    console.log("Parametros de consulta:", params.toString()); // Log para verificar los parámetros
+   // console.log("Parametros de consulta:", params.toString()); // Log para verificar los parámetros
 
     return this.http.get<Features[]>(this.apiUrl, { params });
   }
@@ -101,6 +101,10 @@ export class PlacesService {
 
   emitMeasurements(measurements: any[]) {
     this.measurementSubject.next(measurements);
+  }
+
+  selectMeasurement(measurement: any) {
+    this.measurementSubject.next([measurement]);
   }
 
 

@@ -1,6 +1,6 @@
 
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { SidenavComponent } from "../sidenav/sidenav.component";
 import { Map, Popup, Marker } from 'mapbox-gl';
 import { environment } from '../../../environments/environment';
@@ -8,6 +8,7 @@ import { Estaci, Features } from '../../interfaces/features.interface';
 import { PlacesService } from '../../services/places.service';
 import { SelectorsComponent } from "../selectors/selectors.component";
 import { SliderTransitionComponent } from '../slider-transition/slider-transition.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,12 +18,18 @@ import { SliderTransitionComponent } from '../slider-transition/slider-transitio
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
   private map!: Map;
   public estacions: Features[] = [];
   public estaciName: string[] = [];
   public markers: { coordinates: [number, number]; name: string }[] = [];
+  public measurements: any[] = [];
+
+  private getEstaciSubs!: Subscription;
+  private getCoordSubs!: Subscription;
+
+
 
   isCoverPageVisible = true;
   @ViewChild('mapDiv') mapDivElement!: ElementRef
@@ -30,17 +37,26 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   constructor(private cdr: ChangeDetectorRef,
     private placesService: PlacesService
-  ) {}
+  ) { }
+
+
+  ngOnDestroy(): void {
+    this.map?.remove();
+    this.getEstaciSubs?.unsubscribe();
+    this.getCoordSubs?.unsubscribe();
+
+  }
 
 
   ngAfterViewInit(): void {
     if (!this.isCoverPageVisible) {
       this.initMap();  // Solo inicializa el mapa si el div ya está visible
     }
-
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.center()
+  }
 
   isVisible() {
     this.isCoverPageVisible = false;
@@ -54,7 +70,15 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
   initMap() {
+
+    if (this.map) {
+      console.warn('El mapa ya está inicializado.');
+      return; // Evita inicializar el mapa nuevamente
+    }
+
     if (this.mapDivElement) {
+     
+
       this.map = new Map({
         container: this.mapDivElement.nativeElement, // container ID
         // style: 'mapbox://styles/mapbox/streets-v12', // style URL
@@ -62,8 +86,8 @@ export class MapComponent implements OnInit, AfterViewInit {
         bearing: 5,
         style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
         // style: 'mapbox://styles/mapbox/standard',
-        center: [2.527139561879901, 41.979429631974604],// starting position [lng, lat]
-        zoom: 6,
+        center: [2.833944, 41.977247],// starting position [lng, lat]
+        zoom: 12,
         projection: 'globe',
         accessToken: environment.apiKey,
       });
@@ -75,12 +99,12 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
   fetchEstaci() {
-    this.placesService.getEstaci().subscribe({
+   this.getEstaciSubs = this.placesService.getEstaci().subscribe({
       next: (estaci) => {
         this.estaciName = estaci; // Asigna la lista filtrada a la propiedad del componente
-       // console.log(this.estaciName);
+        // console.log(this.estaciName);
         this.estaciName.forEach(estaci => {
-        this.getCoordinates(estaci);
+          this.getCoordinates(estaci);
         });
       },
       error: (err) => console.error('Error al obtener datos:', err)
@@ -89,10 +113,10 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
   getCoordinates(estaci: string) {
-    this.placesService.getCoordinates(estaci).subscribe({
+    this.getCoordSubs = this.placesService.getCoordinates(estaci).subscribe({
       next: (data) => {
         // console.log(data.features[0].center);
-      // console.log(data)
+        // console.log(data)
         //let coordinates = data.features[0].center;
 
         let coordinates: [number, number];
@@ -104,8 +128,10 @@ export class MapComponent implements OnInit, AfterViewInit {
         } else {
           // Para los demás, usar el center de la posición 0
           coordinates = data.features[0].center;
-         // console.log('Usando coordenadas de features[0]:', coordinates);
+          // console.log('Usando coordenadas de features[0]:', coordinates);
         }
+
+        this.flyTo(coordinates, estaci)
 
         this.addMarker(coordinates, estaci)
 
@@ -122,14 +148,14 @@ export class MapComponent implements OnInit, AfterViewInit {
       .setPopup(new Popup().setHTML(`<h3>${name}</h3>`))
       .addTo(this.map);
 
-      marker.getElement().addEventListener('click', () => {
-        this.flyTo(coordinates, name);  // Llama a flyTo al hacer clic en el marcador
+    marker.getElement().addEventListener('click', () => {
+      this.flyTo(coordinates, name);  // Llama a flyTo al hacer clic en el marcador
     });
   }
 
   flyTo(coordinates: [number, number], name: string) {
     this.map?.flyTo({
-      zoom: 15,
+      zoom: 14,
       center: coordinates,
       speed: 0.4,    // Velocidad del vuelo (ajustable)
       curve: 1.9,    // Curva del vuelo para hacerlo más suave
@@ -138,8 +164,24 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
 
+  center() {
+    this.placesService.measurements$.subscribe(measurements => {
+      this.measurements = measurements;
 
+      if (this.measurements.length > 0) {
+        console.log('Mediciones en map:', this.measurements)
+        const selectedMeasurement = this.measurements[0];
+        const name = selectedMeasurement.estaci;
+        console.log(name);
 
+        if (name) {
+          this.getCoordinates(name);
+        }
+      }
+
+    })
+
+  }
 }
 
 

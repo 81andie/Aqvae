@@ -29,6 +29,7 @@ export class SelectorsComponent implements OnInit {
     this.loadUniqueDates();
     this.setupDateChangeListener();
     this.onDateChange()
+    //console.log(this.measurementSelected)
 
   }
 
@@ -45,7 +46,7 @@ export class SelectorsComponent implements OnInit {
 
   private loadUniqueDates(): void {
     this.placesService.getUniqueDates().subscribe(fechas => {
-      console.log('Fechas únicas:', fechas);
+     // console.log('Fechas únicas:', fechas);
       this.fechas = fechas;
     });
   }
@@ -53,21 +54,21 @@ export class SelectorsComponent implements OnInit {
   private setupDateChangeListener() {
     this.myForm.get('date')?.valueChanges.subscribe(selectedDate => {
       this.loadAvailableEstacions(selectedDate);
-      console.log(this.loadAvailableEstacions)
+      //console.log(this.loadAvailableEstacions)
     });
   }
 
   private loadAvailableEstacions(selectedDate: string) {
     this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
       this.estacionsDisponibles = estacions;
-      console.log(this.estacionsDisponibles);
+    //  console.log(this.estacionsDisponibles);
     });
   }
 
 
   private onDateChange(): void {
     this.myForm.get('date')?.valueChanges.subscribe(selectedDate => {
-      console.log('Fecha seleccionada:', selectedDate); // Para verificar la fecha seleccionada
+      //console.log('Fecha seleccionada:', selectedDate); // Para verificar la fecha seleccionada
       if (selectedDate) {
         this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
           console.log('Estaciones disponibles:', estacions); // Verifica las estaciones que se devuelven
@@ -85,8 +86,8 @@ export class SelectorsComponent implements OnInit {
     const selectedDam = selectElement.value; // Obtén el valor directamente del select
     const selectedDate = this.myForm.get('date')?.value;
 
-    console.log('Pantano seleccionado:', selectedDam); // Log del pantano seleccionado
-    console.log('Fecha seleccionada:', selectedDate); // Log de la fecha seleccionada
+   // console.log('Pantano seleccionado:', selectedDam); // Log del pantano seleccionado
+  // console.log('Fecha seleccionada:', selectedDate); // Log de la fecha seleccionada
 
     // Llama a la función que maneja la obtención de mediciones
     this.onSelectMeasurement(selectedDate, selectedDam);
@@ -99,7 +100,7 @@ export class SelectorsComponent implements OnInit {
 
     this.placesService.getMeasurements(selectedDate, waterDam).subscribe(measurements => {
       this.placesService.emitMeasurements(measurements); // Emitir las mediciones
-      console.log('Mediciones obtenidas:', measurements);
+     // console.log('Mediciones obtenidas:', measurements);
     });
   }
 
