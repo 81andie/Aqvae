@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlacesService } from '../../services/places.service';
 import { Features } from '../../interfaces/features.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,17 +13,30 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './selectors.component.html',
   styleUrl: './selectors.component.css'
 })
-export class SelectorsComponent implements OnInit {
+export class SelectorsComponent implements OnInit, OnDestroy {
 
   public fechas: string[] = [];
   public estacionsDisponibles: string[] = [];
   public estacions: string[] = [];
+
+  private loadUniqueSubs!: Subscription;
+  private setupDateSubs!: Subscription;
+  private loadAvailableSubs!: Subscription;
+  private onDateChangeSubs!:Subscription;
 
   @Output() measurementSelected = new EventEmitter<any[]>();
 
   constructor(private placesService: PlacesService,
     private fb: FormBuilder
   ) { }
+
+
+  ngOnDestroy(): void {
+   this.loadUniqueSubs?.unsubscribe();
+   this.setupDateSubs?.unsubscribe();
+   this.loadAvailableSubs?.unsubscribe();
+   this.onDateChangeSubs?.unsubscribe();
+  }
 
 
   ngOnInit(): void {
@@ -45,21 +59,30 @@ export class SelectorsComponent implements OnInit {
 
 
   private loadUniqueDates(): void {
-    this.placesService.getUniqueDates().subscribe(fechas => {
+   this.loadUniqueSubs= this.placesService.getUniqueDates().subscribe(fechas => {
      // console.log('Fechas únicas:', fechas);
       this.fechas = fechas;
     });
   }
 
   private setupDateChangeListener() {
-    this.myForm.get('date')?.valueChanges.subscribe(selectedDate => {
+
+  const dateControl = this.myForm.get('date');
+
+  if(dateControl){
+
+    this.setupDateSubs = dateControl.valueChanges.subscribe(selectedDate => {
       this.loadAvailableEstacions(selectedDate);
       //console.log(this.loadAvailableEstacions)
     });
+
+  }
+
+
   }
 
   private loadAvailableEstacions(selectedDate: string) {
-    this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
+   this.loadAvailableSubs= this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
       this.estacionsDisponibles = estacions;
     //  console.log(this.estacionsDisponibles);
     });
@@ -67,17 +90,25 @@ export class SelectorsComponent implements OnInit {
 
 
   private onDateChange(): void {
-    this.myForm.get('date')?.valueChanges.subscribe(selectedDate => {
-      //console.log('Fecha seleccionada:', selectedDate); // Para verificar la fecha seleccionada
-      if (selectedDate) {
-        this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
-          console.log('Estaciones disponibles:', estacions); // Verifica las estaciones que se devuelven
-          this.estacions = estacions;
-        });
-      } else {
-        this.estacions = []; // Limpia las estaciones si no hay fecha seleccionada
-      }
-    });
+
+    const dateChange = this.myForm.get('date')
+
+    if(dateChange){
+      this.onDateChangeSubs= dateChange.valueChanges.subscribe(selectedDate => {
+        //console.log('Fecha seleccionada:', selectedDate); // Para verificar la fecha seleccionada
+        if (selectedDate) {
+          this.placesService.getAvailableEstacionsByDate(selectedDate).subscribe(estacions => {
+            console.log('Estaciones disponibles:', estacions); // Verifica las estaciones que se devuelven
+            this.estacions = estacions;
+          });
+        } else {
+          this.estacions = []; // Limpia las estaciones si no hay fecha seleccionada
+        }
+      });
+
+    }
+
+
 
   }
 

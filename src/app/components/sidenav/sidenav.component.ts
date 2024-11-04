@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { SelectorsComponent } from "../selectors/selectors.component";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { PlacesService } from '../../services/places.service';
 import { Features } from '../../interfaces/features.interface';
 
@@ -12,14 +12,19 @@ import { Features } from '../../interfaces/features.interface';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, OnDestroy{
 
   public measurements: any[] = [];
+  private measureSubs!: Subscription;
 
-  constructor(private PlacesService: PlacesService) { }
+  constructor(private placesService: PlacesService) { }
+
+  ngOnDestroy(): void {
+    this.measureSubs?.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.PlacesService.measurements$.subscribe(measurements => {
+   this.measureSubs= this.placesService.measurements$.subscribe(measurements => {
       this.measurements = measurements;
       if (this.measurements.length > 0) {
         this.isSidebarVisible = true

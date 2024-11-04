@@ -22,6 +22,9 @@ export class SliderTransitionComponent implements OnInit, OnDestroy{
   "assets/images/mountain-2651233_1280.jpg",
   "assets/images/nature-8093509_1280.webp",
   "assets/images/autumn-947235_1280.jpg",
+  "assets/images/fascinante-paisaje-pinos-hermoso-lago_181624-25197.jpg",
+ 
+
 
   ]
 

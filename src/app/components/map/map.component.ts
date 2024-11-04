@@ -28,6 +28,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
   private getEstaciSubs!: Subscription;
   private getCoordSubs!: Subscription;
+  private getCenterSubs!: Subscription;
 
 
 
@@ -44,7 +45,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
     this.map?.remove();
     this.getEstaciSubs?.unsubscribe();
     this.getCoordSubs?.unsubscribe();
-
+    this.getCenterSubs?.unsubscribe();
   }
 
 
@@ -77,7 +78,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
     }
 
     if (this.mapDivElement) {
-     
+
 
       this.map = new Map({
         container: this.mapDivElement.nativeElement, // container ID
@@ -91,6 +92,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
         projection: 'globe',
         accessToken: environment.apiKey,
       });
+
+      this.map.setCenter([2.833944, 41.977247]);
 
     } else {
       console.error('mapDivElement no esta disponivle')
@@ -154,7 +157,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   flyTo(coordinates: [number, number], name: string) {
-    this.map?.flyTo({
+    this.map.flyTo({
       zoom: 14,
       center: coordinates,
       speed: 0.4,    // Velocidad del vuelo (ajustable)
@@ -165,7 +168,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
 
   center() {
-    this.placesService.measurements$.subscribe(measurements => {
+   this.getCenterSubs = this.placesService.measurements$.subscribe(measurements => {
       this.measurements = measurements;
 
       if (this.measurements.length > 0) {
