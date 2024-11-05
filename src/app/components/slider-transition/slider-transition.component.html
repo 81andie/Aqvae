@@ -2,18 +2,17 @@
 <section class="slider">
   <img
   [srcset]="images[currentIndex]"
-  class="img w-screen h-screen object-cover "
-  loading="lazy" />
-
-
-
+  class="img w-screen h-[calc(100vh-79.99px)] object-cover "
+  loading="lazy"
+  />
 
 </section>
 
 <div class="flex flex-row relative mt-4  space-x-2"  >
-
-  <img
- *ngFor="let image of images; let i = index"
+ <!-- <img
+ //*ngFor="let image of images; let i = index"
+ loading="lazy"
+ alt="imagenes de naturaleza"
  [src]="image"
  (click)="setCurrentIndex(i)"
  [class.selected]="i === currentIndex"
@@ -21,6 +20,23 @@
  [ngClass]="{ 'border-blue-500': i === currentIndex, 'border-transparent': i !== currentIndex }"
 
   />
+
+-->
+
+@for ( i of indices; track i) {
+  <img
+    [src]="images[i]"
+    loading="lazy"
+    (click)="setCurrentIndex(i)"
+    [class.selected]="i === currentIndex"
+    class="ml-2 w-16 h-16 object-cover cursor-pointer rounded-md border-2"
+    [ngClass]="{ 'border-blue-500': i === currentIndex, 'border-transparent': i !== currentIndex }"
+  />
+}
+
+
+
+
 
 </div>
 

@@ -9,6 +9,7 @@ import { PlacesService } from '../../services/places.service';
 import { SelectorsComponent } from "../selectors/selectors.component";
 import { SliderTransitionComponent } from '../slider-transition/slider-transition.component';
 import { Subscription } from 'rxjs';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
@@ -16,7 +17,9 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [CommonModule, SidenavComponent, SelectorsComponent, SliderTransitionComponent],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.css'
+  styleUrl: './map.component.css',
+
+
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
@@ -33,6 +36,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
 
   isCoverPageVisible = true;
+
+
   @ViewChild('mapDiv') mapDivElement!: ElementRef
 
 
@@ -114,13 +119,23 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
     });
   }
 
+  public location_estations: any = {};
 
   getCoordinates(estaci: string) {
+
+    if(this.location_estations[estaci]){
+      let coordinates = this.location_estations[estaci];
+      this.flyTo(coordinates, estaci);
+      this.addMarker(coordinates, estaci);
+      return;
+    }
+
     this.getCoordSubs = this.placesService.getCoordinates(estaci).subscribe({
       next: (data) => {
         // console.log(data.features[0].center);
         // console.log(data)
         //let coordinates = data.features[0].center;
+
 
         let coordinates: [number, number];
 
@@ -133,6 +148,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
           coordinates = data.features[0].center;
           // console.log('Usando coordenadas de features[0]:', coordinates);
         }
+
+        this.location_estations[estaci] = coordinates;
 
         this.flyTo(coordinates, estaci)
 
@@ -160,7 +177,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
     this.map.flyTo({
       zoom: 14,
       center: coordinates,
-      speed: 0.4,    // Velocidad del vuelo (ajustable)
+      speed: 0.6,    // Velocidad del vuelo (ajustable)
       curve: 1.9,    // Curva del vuelo para hacerlo más suave
       essential: true
     })

@@ -1,5 +1,6 @@
 <div *ngIf="!isCoverPageVisible">
-  <div class="container  bg-blue-100 prueba md:w-8/12 h-28 md:flex-row flex  sm:flex-row sm:h-14  md:h-14 p-2 mt-2 rounded-sm">
+  <div
+    class="container  bg-blue-100 prueba md:w-8/12 h-28 md:flex-row flex  sm:flex-row sm:h-14  md:h-14 p-2 mt-2 rounded-sm">
     <app-selectors class="w-full"></app-selectors>
   </div>
 
@@ -8,18 +9,17 @@
 </div>
 
 <div *ngIf="!isCoverPageVisible">
-
   <app-sidenav></app-sidenav>
 </div>
 
 
-<div class="map1 flex h-full w-full" *ngIf="isCoverPageVisible">
+<div class="map1 flex h-[calc(100vh-79.99px)] w-full" *ngIf="isCoverPageVisible">
   <app-slider-transition />
   <div class="overlay flex flex-col justify-center">
     <h6 class="text-1xl  text-amber-200 line-clamp-3  bg-blue-600  ">Medició a temps reals dels Embassaments de la Conca
       Mediterránea</h6>
     <h1 class=" text-5xl font-extrabold text-amber-300 drop-shadow-lg title1">Claustrum</h1>
-    <h3 class="text-5xl  text-white font-extrabold title2" >Aqvae</h3>
+    <h3 class="text-5xl  text-white font-extrabold title2">Aqvae</h3>
     <button class="w-24 mt-3 h-9 p-1 bg-blue-600 rounded-md" (click)="isVisible()">
 
       <span class="relative text-white font-boldh-3 w-3 ">
