@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 import { Component } from '@angular/core';
 import { MapComponent } from './components/map/map.component';
-import { DamStatsComponent } from './components/dam-stats/dam-stats.component';
+import { StoryComponent } from './components/story/story.component';
 
 
 export const routes: Routes = [
 
-  {path: '', component: MapComponent},
-  { path: 'damstats', component:DamStatsComponent}
+  { path: '', component: MapComponent },
+  { path: 'story', component: StoryComponent }
 
 
 ];
