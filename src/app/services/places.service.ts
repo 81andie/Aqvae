@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
-import {  BehaviorSubject, map, Observable,  tap } from "rxjs";
+import { BehaviorSubject, map, Observable,  tap } from "rxjs";
 import { Estaci, Features } from '../interfaces/features.interface';
-
-
 import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable({
@@ -107,10 +105,14 @@ export class PlacesService {
     this.measurementSubject.next([measurement]);
   }
 
-  //ploty
+
+ getSpeciesData():Observable <any>{
+  return this.http.get <any[]>('assets/species-data.json')
+ }
 
 
- 
+
+
 
 
 
