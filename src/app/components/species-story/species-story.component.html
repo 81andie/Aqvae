@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col sm:flex-row md:flex-row  md:ml-20 md:mr-20 justify-center items-center mt-7 pb-3 ml-5 mr-5 p-1 rounded-lg shadow-lg mb-4">
+  class="flex flex-col sm:flex-row md:flex-row  md:ml-20 md:mr-20 justify-center items-center mt-8 pb-3 ml-5 mr-5 p-1 rounded-lg shadow-lg mb-8">
   <div class="p-2">
     <h1 class="text-3xl font-bold bg-gradient-to-r from-cyan-200 to-blue-100 mb-2">Preocupació pels ecosistemes
       dependents d'aigua</h1>
@@ -13,19 +13,13 @@
     <span>En el cas dels amfibis i peixos l'afectació9 és directament la pèrdua d'habitat, facilitant la mort
       d'individus, generant una extinció genètica de poblacions. </span>
   </div>
-
-
-
-
 </div>
 
 
-<h1 class=" md:ml-20 md:mr-20 ml-3 mr-3 text-3xl font-bold bg-gradient-to-r from-cyan-200 to-blue-100 mb-2 p-2">Espécies en extinció
+<h1 class=" md:ml-20 md:mr-20 ml-3 mr-3 text-3xl font-bold bg-gradient-to-r from-cyan-200 to-blue-100  p-2 mb-8">Espécies
+  en extinció
 </h1>
-
-
-<div class="grid grid-cols-1 md:grid-cols-3 md:ml-20 md:mr-20 gap-3 rounded-lg ">
-
+<div class="grid grid-cols-1 md:grid-cols-3 md:ml-20 md:mr-20 gap-3 rounded-lg mb-8">
   @for (specie of speciesData; track specie){
   <div class="w-auto especie1 bg-slate-100 p-3 rounded-sm shadow-lg">
     <p class="text-gray-50 bg-gradient-to-r from-sky-300 to-indigo-400 p-2 font-bold">{{specie.name}}</p>
@@ -33,7 +27,5 @@
     <p class="text-xs w-full text-center p-1 font-bold ">{{specie.scientificName}}</p>
     <p class="mt-2 text-center">{{specie.habitat}}</p>
   </div>
-
   }
-
 </div>
