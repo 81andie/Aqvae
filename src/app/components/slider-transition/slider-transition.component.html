@@ -8,7 +8,7 @@
 
 </section>
 
-<div class="flex flex-row relative mt-4  space-x-2"  >
+<div class="flex flex-row relative mt-4  space-x-1"  >
  <!-- <img
  //*ngFor="let image of images; let i = index"
  loading="lazy"
@@ -29,7 +29,7 @@
     loading="lazy"
     (click)="setCurrentIndex(i)"
     [class.selected]="i === currentIndex"
-    class="ml-2 w-16 h-16 object-cover cursor-pointer rounded-md border-2"
+    class="ml-1 w-16 h-16 object-cover cursor-pointer rounded-md border-2"
     [ngClass]="{ 'border-blue-500': i === currentIndex, 'border-transparent': i !== currentIndex }"
   />
 }

@@ -1,5 +1,12 @@
-.fondo{
-  object-fit: cover;
-  background-image:url("https://img.freepik.com/foto-gratis/salamandra-salvaje-hermosa-habitat-natural_475641-347.jpg?t=st=1731069350~exp=1731072950~hmac=5d5ac285c756b94ec61d81a60957b99267cbfdaa83652a6778db72c425de47d9&w=826") ;
-  background-size: cover;
+
+
+.Letrasconfondo{
+  background: url("https://img.freepik.com/vector-gratis/fondo-realista-agua-limpia_52683-60648.jpg?t=st=1731098394~exp=1731101994~hmac=1026811cae80923f26a4dd3b6e027705f60754f8cc4d8e9834d87053a5e2212a&w=826");
+ -webkit-text-fill-color: transparent;
+ background-clip: text;
+ background-size:contain;
+ text-shadow: -12px 2px 3px rgba(70, 230, 244, 0.317);
+
+/*-webkit-text-stroke: 1px rgb(249, 250, 248)*/
 }
+
