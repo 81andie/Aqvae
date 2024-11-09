@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
-import { MapComponent } from "./components/map/map.component";
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { SelectorsComponent } from "./components/selectors/selectors.component";
+
+
+
 
 
 @Component({
@@ -14,7 +14,6 @@ import { SelectorsComponent } from "./components/selectors/selectors.component";
     CommonModule,
     RouterOutlet,
     HeaderComponent,
-   
 
 ],
   templateUrl: './app.component.html',
@@ -22,4 +21,6 @@ import { SelectorsComponent } from "./components/selectors/selectors.component";
 })
 export class AppComponent {
   title = 'Aqvae';
+
+
 }

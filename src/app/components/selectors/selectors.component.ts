@@ -4,12 +4,13 @@ import { PlacesService } from '../../services/places.service';
 import { Features } from '../../interfaces/features.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { LanguageSelectorComponent } from "../language-selector/language-selector.component";
 
 
 @Component({
   selector: 'app-selectors',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LanguageSelectorComponent],
   templateUrl: './selectors.component.html',
   styleUrl: './selectors.component.css'
 })

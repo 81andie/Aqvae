@@ -2,19 +2,20 @@
   <nav class="flex max-w-screen-xl px-5 mx-auto md:items-center md:justify-between md:flex-row  lg:px-8">
     <!-- Contenedor del logo -->
     <div class="flex items-center">
-      <a href="#" class="text-lg font-semibold tracking-widest text-lime-950 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Claustrum Aquae</a>
-      <img src="https://i.ibb.co/0M7ZsMm/gota-de-agua-1.png" alt="gota de agua" class="w-4 h-6 md:w-8 md:h-12 ml-2">
+      <a href="#" class="text-sm font-semibold tracking-widest text-lime-950 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Claustrum Aquae</a>
+      <img src="https://i.ibb.co/0M7ZsMm/gota-de-agua-1.png" alt="gota de agua" class="w-4 h-6 md:w-8 md:h-12 ml-1">
     </div>
 
     <!-- Contenedor de los enlaces (a la derecha) -->
     <div class="flex ml-auto items-center">
-      <button class="w-20  rounded-lg ml-4 p-1 text-white font-bold border-spacing-2 border-2
+      <button class="w-18 rounded-lg ml-6 p-1 text-white text-sm font-bold border-spacing-2 border-2
       ">
-        <a [routerLink]="['/']">Inicio</a>
+        <a [routerLink]="['/']">{{'home' | translate}}</a>
       </button>
-      <button class="w-20 font-bold text-white   p-1 rounded-lg ml-2 border-spacing-1 border-2 border-white ">
-        <a [routerLink]="['/story']" routerLinkActive="active" >Historia</a>
+      <button class="w-18 font-bold text-white text-sm  p-1 rounded-lg ml-2 border-spacing-1 border-2 border-white ">
+        <a [routerLink]="['/story']" routerLinkActive="active">{{'history' | translate}}</a>
       </button>
     </div>
+    <app-language-selector/>
   </nav>
 </div>
