@@ -4,6 +4,7 @@
   [srcset]="images[currentIndex]"
   class="img w-screen h-[calc(100vh-48px)] object-cover "
   loading="lazy"
+  alt="imagenes de rios, pantanos y pantanos secos"
   />
 
 </section>
@@ -30,6 +31,7 @@
     (click)="setCurrentIndex(i)"
     [class.selected]="i === currentIndex"
     class="ml-1 w-16 h-16 object-cover cursor-pointer rounded-md border-2"
+    alt="imagenes de rios, pantanos y pantanos secos"
     [ngClass]="{ 'border-blue-500': i === currentIndex, 'border-transparent': i !== currentIndex }"
   />
 }

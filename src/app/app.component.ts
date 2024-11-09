@@ -14,9 +14,8 @@ import { SelectorsComponent } from "./components/selectors/selectors.component";
     CommonModule,
     RouterOutlet,
     HeaderComponent,
-    MapComponent,
-    SidenavComponent,
-    SelectorsComponent
+   
+
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
