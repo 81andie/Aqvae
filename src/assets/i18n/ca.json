@@ -48,18 +48,53 @@
   "SpeciesStrong2": "'disminució generalitzada' de les poblacions de fauna, posiblement degut a la sequera.",
   "SpeciesStrong3": "Per a ells es molt difícil poder subsistir si no tenen un element tan essencial com l'aigua per viure. La manca d'aigua corrent, fa que les aigües siguin de menor qualitat i amb menys oxigen, afectant a mamífers, rèptils i aus.",
   "SpeciesSpan": "En el cas dels amfibis i peixos l'afectació és directament la pèrdua d'habitat, facilitant la mort d'individus, generant una extinció genètica de poblacions.",
-  "SpeciesTitle1": "Barb de muntanya",
-  "SpeciesSpanInfo": "Rius de muntanya i aigües fredes, especialment en conques fluvials d'alta muntanya i rius d'aigües netes i oxigenades.",
-  "SpeciesTitle2": "Tritó del Montseny",
-  "SpeciesSpanInfo2": "Boscos de muntanya i zones humides al massís del Montseny, en tolls i rierols d'aigua neta i fresca",
-  "SpeciesTitle3": "Salamandra comuna",
-  "SpeciesSpanInfo3": "Boscos humits i zones ombrívoles, generalment en àrees de muntanya amb vegetació abundant i rius o rierols propers.",
-  "SpeciesTitle4": "Tortuga d'estany",
-  "SpeciesSpanInfo4": "Llacs, estanys i rius amb vegetació aquàtica abundant, preferint aigües calmades i poc profundes.",
-  "SpeciesTitle5": "Nàyade",
-  "SpeciesSpanInfo5": "Riols i rius d'aigua dolça, neta i oxigenada, sovint en zones de fons sorrenc i de corrent moderada.",
-  "SpeciesTitle6": "Anguila",
-  "SpeciesSpanInfo6": "Riols i rius de tota Europa, en aigües dolces i salobres, on es desplaça a les zones d'aigües més calentes durant la migració.",
+
+
+    "species": [
+      {
+        "id": 1,
+        "name": "Barb de muntanya",
+        "scientificName": "Barbus meridionalis",
+        "habitat": "Rius de muntanya i aigües fredes, especialment en conques fluvials d'alta muntanya i rius d'aigües netes i oxigenades.",
+        "image": "assets/images/barbdemuntanya.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Tritó del Montseny",
+        "scientificName": "Calotriton arnoldi",
+        "habitat": "Boscos de muntanya i zones humides al massís del Montseny, en tolls i rierols d'aigua neta i fresca.",
+        "image": "assets/images/tritodelmontseny.jpg"
+      },
+      {
+        "id": 3,
+        "name": "Salamandra comuna",
+        "scientificName": "Salamandra salamandra",
+        "habitat": "Boscos humits i zones ombrívoles, generalment en àrees de muntanya amb vegetació abundant i rius o rierols propers.",
+        "image": "assets/images/salamandracomuna.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Tortuga d'estany",
+        "scientificName": "Emys orbicularis",
+        "habitat": "Llacs, estanys i rius amb vegetació aquàtica abundant, preferint aigües calmades i poc profundes.",
+        "image": "assets/images/tortugadestany.jpg"
+      },
+      {
+        "id": 5,
+        "name": "Nàyade",
+        "scientificName": "Margaritifera margaritifera",
+        "habitat": "Riols i rius d'aigua dolça, neta i oxigenada, sovint en zones de fons sorrenc i de corrent moderada.",
+        "image": "assets/images/naiade.jpeg"
+      },
+      {
+        "id": 6,
+        "name": "Anguila",
+        "scientificName": "Anguilla anguilla",
+        "habitat": "Riols i rius de tota Europa, en aigües dolces i salobres, on es desplaça a les zones d'aigües més calentes durant la migració.",
+        "image": "assets/images/anguila.jpg"
+      }
+    ],
+
   "StoryTitle1": "La sequera",
   "StorySpanStrong1": "La sequera a Cataluña, és un procés influenciat tant per les",
   "StorySpanStrong2": "condicions meteorològiques com per decisions humanes",
@@ -69,4 +104,7 @@
   "StoryTitle2": "Les conseqüencies de la Sequera",
   "StorySpan": "Aquestes condicions ens han portat una disminució dels nivells embassaments i aqüífers, a més d’un impacte del canvi climàtic que afecta la Conca Mediterrànea amb un escalfament superior a la mitjana global.",
   "StorySpan1": "L’augment de les temperatures, farà que les sequeres siguin cada vegada més frequënts i intenses, amb la previsió d’una reducció de la precipitació d’un 50% cap l’any 2100."
+
+
+
 }
