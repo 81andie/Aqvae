@@ -1,35 +1,39 @@
 [
-  {
+  { "id": 1,
     "name": "Barb de muntanya",
     "scientificName": "Barbus meridionalis",
     "habitat": "Rius de muntanya i aigües fredes, especialment en conques fluvials d'alta muntanya i rius d'aigües netes i oxigenades.",
     "image": "assets/images/barbdemuntanya.jpg"
   },
   {
+    "id": 2,
     "name": "Tritó del Montseny",
     "scientificName": "Calotriton arnoldi",
     "habitat": "Boscos de muntanya i zones humides al massís del Montseny, en tolls i rierols d'aigua neta i fresca.",
     "image": "assets/images/tritodelmontseny.jpg"
   },
   {
+    "id":3,
     "name": "Salamandra comuna",
     "scientificName": "Salamandra salamandra",
     "habitat": "Boscos humits i zones ombrívoles, generalment en àrees de muntanya amb vegetació abundant i rius o rierols propers.",
     "image": "assets/images/salamandracomuna.jpg"
   },
   {
+    "id": 4,
     "name": "Tortuga d'estany",
     "scientificName": "Emys orbicularis",
     "habitat": "Llacs, estanys i rius amb vegetació aquàtica abundant, preferint aigües calmades i poc profundes.",
     "image": "assets/images/tortugadestany.jpg"
   },
   {
+    "id": 5,
     "name": "Nàyade",
     "scientificName": "Margaritifera margaritifera",
     "habitat": "Riols i rius d'aigua dolça, neta i oxigenada, sovint en zones de fons sorrenc i de corrent moderada.",
     "image": "/assets/images/naiade.jpeg"
   },
-  {
+  { "id": 6,
     "name": "Anguila",
     "scientificName": "Anguilla anguilla",
     "habitat": "Riols i rius de tota Europa, en aigües dolces i salobres, on es desplaça a les zones d'aigües més calentes durant la migració.",
