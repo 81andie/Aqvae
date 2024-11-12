@@ -11,13 +11,14 @@ import { SliderTransitionComponent } from '../slider-transition/slider-transitio
 import { Subscription } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { LanguageSelectorComponent } from "../language-selector/language-selector.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule, SidenavComponent, SelectorsComponent, SliderTransitionComponent, ],
+  imports: [CommonModule, SidenavComponent, SelectorsComponent, SliderTransitionComponent, TranslateModule],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css',
 

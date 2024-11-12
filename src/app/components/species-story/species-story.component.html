@@ -7,25 +7,23 @@
     <span>{{'SpeciesStrong1'| translate}} <strong>{{ "SpeciesStrong2"|translate}}
       </strong> {{"SpeciesStrong3"|translate}}</span>
     <br>
-    <span>En el cas dels amfibis i peixos l'afectació és directament la pèrdua d'habitat, facilitant la mort
-      d'individus, generant una extinció genètica de poblacions. </span>
+    <span>{{"SpeciesSpan" | translate }} </span>
   </div>
 </div>
 
 
 <h1 class=" md:ml-20 md:mr-20 ml-3 mr-3 text-3xl font-bold bg-gradient-to-r from-cyan-200 to-blue-100  p-2 mb-8">
-  Espécies
-  en extinció
+ {{"SpeciesEx" | translate}}
 </h1>
 
 <div class="grid grid-cols-1 md:grid-cols-3 md:ml-20 md:mr-20 gap-3 rounded-lg mb-8">
-  @for (specie of speciesData; track specie; let i = $index){
+  @for (species of speciesData1; track species){
   <div class="w-auto especie1 bg-slate-100 p-3 rounded-sm shadow-lg">
     <p class="text-gray-50 bg-gradient-to-r from-sky-300 to-indigo-400 p-2 font-bold">
-    {{specie.name}}  </p>
-    <img class="w-full object-cover h-36 " [src]=specie.image />
-    <p class="text-xs w-full text-center p-1 font-bold ">{{specie.scientificName}}</p>
-    <p class="mt-2 text-center">{{specie.habitat}}</p>
+     {{'species.' + species.key + '.title' |translate}} </p>
+    <img class="w-full object-cover h-36" [src]= "('species.' + species.key + '.image' | translate)" alt="{{ species.key }}">
+    <p class="text-xs w-full text-center p-1 font-bold ">{{'species.' + species.key + '.scientificName' |translate}}</p>
+    <p class="mt-2 text-center">{{ 'species.' + species.key + '.habitat' | translate }}</p>
   </div>
   }
 

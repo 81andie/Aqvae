@@ -2,15 +2,16 @@
   <div class="flex flex-col ms:flex-row md:flex-row gap-3 justify-evenly rounded-sm">
 
     <select name="select" formControlName="date" id="date" class="ml-1 p-2 w-full rounded-sm drop-shadow-xl ">
-      <option value="">-- Seleccioni una data --</option>
+      <option value="">-- {{"SelectorsDate"|translate}} --</option>
       <option *ngFor="let fecha of fechas" [value]="fecha" selected>{{fecha | date:'dd/MM/yyyy' }}</option>
 
     </select>
 
-    <select name="select" (change)="onWaterDamChange($event)"  formControlName="waterDam" id="waterDam"  class="ml-1 w-full p-2 drop-shadow-xl rounded shadow-blue-300">
+    <select name="select" (change)="onWaterDamChange($event)" formControlName="waterDam" id="waterDam"
+      class="ml-1 w-full p-2 drop-shadow-xl rounded shadow-blue-300">
 
-      <option value="">-- Seleccioni un embalssament --</option>
-      <option *ngFor="let dam of estacions" [value]="dam">{{dam}}</option>
+      <option value="">-- {{"SelectorsDamm" | translate}} --</option>
+      <option *ngFor="let dam of estacions" [value]="dam"> {{"Damm" |translate}} {{dam | slice: 15}}</option>
 
     </select>
 
@@ -18,5 +19,3 @@
   </div>
 
 </form>
-
-

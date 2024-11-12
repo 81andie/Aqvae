@@ -32,34 +32,64 @@
   "InfoTipsAlt6": "piscina bien cuidada",
   "InfoTipssubs6": "Haz un buen mantenimiento de la piscina de tu casa",
   "InfoTipsParag6": "Si la mantienes siempre en perfectas condiciones, evitarás tener que vaciarla y malgastar agua...",
-  "MapSubtitle": "Medición en tiempo real de los embalses de la Cuenca",
+  "MapSubtitle": "Medición en tiempo real de los embalses de la Cuenca del Mediterráneo",
   "MapSpan": " Entrar",
   "ErrorPage": "Se ha producido un error en la página",
   "PageNotFound": "Lo sentimos, pero no encontramos la página",
   "SelectorsDate": "Seleccione una fecha",
   "SelectorsDamm": "Seleccione un embalse",
   "Damm": "Embalse",
+  "level":"nivel del agua sobre el mar",
   "levelWater": "Nivel del agua",
   "PercentWater": "Porcentaje de volumen de agua",
   "volumeOfWater": "Volumen de agua",
+  "SpeciesEx": "Espécies en extinción",
   "SpeciesTitle": "Preocupación por los ecosistemas dependientes de agua",
   "SpeciesSub": "Los habitantes de nuestros ríos están notando especialmente la acusada falta de agua",
   "SpeciesStrong1": "En Cataluña se ha observado una",
   "SpeciesStrong2": "'disminución generalizada' de las poblaciones de fauna, posiblemente debido a la sequía.",
   "SpeciesStrong3": "Para ellos es muy difícil poder subsistir si no tienen un elemento tan esencial como el agua para vivir. La falta de agua corriente hace que las aguas sean de menor calidad y con menos oxígeno, afectando a mamíferos, reptiles y aves.",
   "SpeciesSpan": "En el caso de los anfibios y peces, la afectación es directamente la pérdida de hábitat, facilitando la muerte de individuos y generando una extinción genética de poblaciones.",
-  "SpeciesTitle1": "Barbo de montaña",
-  "SpeciesSpanInfo": "Ríos de montaña y aguas frías, especialmente en cuencas fluviales de alta montaña y ríos de aguas limpias y oxigenadas.",
-  "SpeciesTitle2": "Tritón del Montseny",
-  "SpeciesSpanInfo2": "Bosques de montaña y zonas húmedas en el macizo del Montseny, en charcas y arroyos de agua limpia y fresca",
-  "SpeciesTitle3": "Salamandra común",
-  "SpeciesSpanInfo3": "Bosques húmedos y zonas sombrías, generalmente en áreas de montaña con abundante vegetación y ríos o arroyos cercanos.",
-  "SpeciesTitle4": "Tortuga de estanque",
-  "SpeciesSpanInfo4": "Lagos, estanques y ríos con abundante vegetación acuática, prefiriendo aguas calmadas y poco profundas.",
-  "SpeciesTitle5": "Náyade",
-  "SpeciesSpanInfo5": "Arroyos y ríos de agua dulce, limpia y oxigenada, a menudo en zonas de fondo arenoso y de corriente moderada.",
-  "SpeciesTitle6": "Anguila",
-  "SpeciesSpanInfo6": "Arroyos y ríos de toda Europa, en aguas dulces y salobres, donde se desplaza a las zonas de aguas más cálidas durante la migración.",
+
+  "species": {
+  "Barbdemuntanya": {
+    "title": "Barbo de montaña",
+    "scientificName": "Barbus meridionalis",
+    "habitat": "Ríos de montaña y aguas frías, especialmente en cuencas fluviales de alta montaña y ríos de aguas limpias y oxigenadas.",
+    "image": "assets/images/barbdemuntanya.jpg"
+  },
+  "Tritodelmontseny": {
+    "title": "Tritón del Montseny",
+    "scientificName": "Calotriton arnoldi",
+    "habitat": "Bosques de montaña y zonas húmedas en el macizo del Montseny, en pozas y arroyos de agua limpia y fresca.",
+    "image": "assets/images/tritodelmontseny.jpg"
+  },
+  "Salamandracomuna": {
+    "title": "Salamandra común",
+    "scientificName": "Salamandra salamandra",
+    "habitat": "Bosques húmedos y zonas sombrías, generalmente en áreas de montaña con vegetación abundante y ríos o arroyos cercanos.",
+    "image": "assets/images/salamandracomuna.jpg"
+  },
+  "Tortugadestany": {
+    "title": "Tortuga de estanque",
+    "scientificName": "Emys orbicularis",
+    "habitat": "Lagos, estanques y ríos con vegetación acuática abundante, prefiriendo aguas tranquilas y poco profundas.",
+    "image": "assets/images/tortugadestany.jpg"
+  },
+  "Naiade": {
+    "title": "Náyade",
+    "scientificName": "Margaritifera margaritifera",
+    "habitat": "Arroyos y ríos de agua dulce, limpia y oxigenada, a menudo en zonas de fondo arenoso y de corriente moderada.",
+    "image": "assets/images/naiade.jpeg"
+  },
+  "Anguila": {
+    "title": "Anguila",
+    "scientificName": "Anguilla anguilla",
+    "habitat": "Arroyos y ríos de toda Europa, en aguas dulces y salobres, donde se desplaza a las zonas de aguas más cálidas durante la migración.",
+    "image": "assets/images/anguila.jpg"
+  }
+},
+
   "StoryTitle1": "La sequía",
   "StorySpanStrong1": "La sequía en Cataluña es un proceso influenciado tanto por las",
   "StorySpanStrong2": "condiciones meteorológicas como por decisiones humanas",

@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { SelectorsComponent } from "../selectors/selectors.component";
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Component,  OnDestroy, OnInit, } from '@angular/core';
+
+import { Subscription } from 'rxjs';
 import { PlacesService } from '../../services/places.service';
-import { Features } from '../../interfaces/features.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
