@@ -96,7 +96,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
         style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
         // style: 'mapbox://styles/mapbox/standard',
         center: [2.833944, 41.977247],// starting position [lng, lat]
-        zoom: 12,
+        zoom: 10,
         projection: 'globe',
         accessToken: environment.apiKey,
       });
@@ -178,7 +178,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
   flyTo(coordinates: [number, number], name: string) {
     this.map.flyTo({
-      zoom: 14,
+      zoom: 12,
       center: coordinates,
       speed: 0.6,    // Velocidad del vuelo (ajustable)
       curve: 1.9,    // Curva del vuelo para hacerlo más suave
