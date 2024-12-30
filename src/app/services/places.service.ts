@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, Observable,  tap } from "rxjs";
+import { BehaviorSubject, map, Observable, tap } from "rxjs";
 import { Estaci, Features } from '../interfaces/features.interface';
 import { HttpClient, HttpParams } from "@angular/common/http";
 
@@ -39,21 +39,28 @@ export class PlacesService {
       map(data => {
         const filteredEstacions = data.map(estacion => estacion.estaci)
         this.estaciName = [...new Set(filteredEstacions)];
-       // console.log(this.estaciName);
+        // console.log(this.estaciName);
         return this.estaciName;
       })
     );
   }
 
   getCoordinates(estaciName: string): Observable<any> {
-    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`;
+    const normalizedName = estaciName
+
+   .replace('Embalssament', 'Pantà')
+   .replace('Embassament', 'Embalssament')
+   .replace('Embassament', 'Reservoir')
+
+    const bbox = '-0.6,40.5,3.4,42.9';
+    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(normalizedName)}.json?bbox=${bbox}&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`;
     return this.http.get<any>(apiUrl);
   }
 
-  getUniqueDates(): Observable<string[]>{
+  getUniqueDates(): Observable<string[]> {
 
     return this.getLocations().pipe(
-      map(data=>{
+      map(data => {
         const dates = data.map(item => item.dia.toString());
         return Array.from(new Set(dates))
       })
@@ -91,7 +98,7 @@ export class PlacesService {
       params = params.append("$where", `volum_embassat = ${minVolume}`);
     }
 
-   // console.log("Parametros de consulta:", params.toString()); // Log para verificar los parámetros
+    // console.log("Parametros de consulta:", params.toString()); // Log para verificar los parámetros
 
     return this.http.get<Features[]>(this.apiUrl, { params });
   }
@@ -106,9 +113,9 @@ export class PlacesService {
   }
 
 
- getSpeciesData():Observable <any>{
-  return this.http.get <any[]>('assets/species-data.json')
- }
+  getSpeciesData(): Observable<any> {
+    return this.http.get<any[]>('assets/species-data.json')
+  }
 
 
 

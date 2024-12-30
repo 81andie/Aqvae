@@ -113,12 +113,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
    this.getEstaciSubs = this.placesService.getEstaci().subscribe({
       next: (estaci) => {
         this.estaciName = estaci; // Asigna la lista filtrada a la propiedad del componente
-        // console.log(this.estaciName);
+       // console.log(this.estaciName);
         this.estaciName.forEach(estaci => {
           this.getCoordinates(estaci);
+         // console.log(estaci)
         });
       },
       error: (err) => console.error('Error al obtener datos:', err)
+
     });
   }
 
@@ -128,6 +130,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
     if(this.location_estations[estaci]){
       let coordinates = this.location_estations[estaci];
+
+      //console.log(this.location_estations)
       this.flyTo(coordinates, estaci);
       this.addMarker(coordinates, estaci);
       return;
@@ -136,23 +140,24 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
     this.getCoordSubs = this.placesService.getCoordinates(estaci).subscribe({
       next: (data) => {
         // console.log(data.features[0].center);
-        // console.log(data)
+         console.log(data)
         //let coordinates = data.features[0].center;
 
 
         let coordinates: [number, number];
+         coordinates = data.features[0].center;
+
+
 
         // Verificar si es "Vilanova de Sau" y usar el center de la posición 2
-        if (estaci.toLowerCase().includes("vilanova de sau") && data.features.length > 2) {
-          coordinates = data.features[2].center;
-          //console.log('Usando coordenadas de features[2] para Vilanova de Sau:', coordinates);
-        } else {
-          // Para los demás, usar el center de la posición 0
-          coordinates = data.features[0].center;
-          // console.log('Usando coordenadas de features[0]:', coordinates);
+        if ( data.features.length > 2) {
+          this.location_estations[estaci] = coordinates;
         }
 
-        this.location_estations[estaci] = coordinates;
+
+
+
+        console.log(this.location_estations[estaci])
 
         this.flyTo(coordinates, estaci)
 
@@ -195,7 +200,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
         console.log('Mediciones en map:', this.measurements)
         const selectedMeasurement = this.measurements[0];
         const name = selectedMeasurement.estaci;
-        console.log(name);
+       // console.log(name);
 
         if (name) {
           this.getCoordinates(name);

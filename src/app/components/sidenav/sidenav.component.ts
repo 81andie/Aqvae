@@ -30,7 +30,7 @@ export class SidenavComponent implements OnInit, OnDestroy{
         this.isSidebarVisible = true
       }
       // Actualizar las mediciones
-      console.log('Mediciones en Sidenav:', this.measurements);
+     // console.log('Mediciones en Sidenav:', this.measurements);
     });
 
   }
