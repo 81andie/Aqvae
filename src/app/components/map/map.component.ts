@@ -113,10 +113,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
    this.getEstaciSubs = this.placesService.getEstaci().subscribe({
       next: (estaci) => {
         this.estaciName = estaci; // Asigna la lista filtrada a la propiedad del componente
-       // console.log(this.estaciName);
+       console.log(this.estaciName);
         this.estaciName.forEach(estaci => {
           this.getCoordinates(estaci);
-         // console.log(estaci)
+          console.log(estaci)
         });
       },
       error: (err) => console.error('Error al obtener datos:', err)
@@ -158,9 +158,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
 
         console.log(this.location_estations[estaci])
-
         this.flyTo(coordinates, estaci)
-
         this.addMarker(coordinates, estaci)
 
       },
