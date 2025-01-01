@@ -52,8 +52,10 @@ export class PlacesService {
 
 
     const bbox = '0.15,40.5,3.5,42.8';
-    const apiUrl = `https://api.mapbox.com/search/searchbox/v1/retrieve/dXJuOm1ieHBvaTplMDY1ZWY5Ni1hNDRhLTRkMTItYTViMy1hYjEwNTI0NTQyYjI?session_token=08a83587-a7bf-4281-8941-cfe091c040e0&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww&q=${estaciName}&types=poi&bbox=0.15,40.5,3.5,42.8`;
+    //esta no funciona bien
+    //const apiUrl = `https://api.mapbox.com/search/searchbox/v1/retrieve/dXJuOm1ieHBvaTplMDY1ZWY5Ni1hNDRhLTRkMTItYTViMy1hYjEwNTI0NTQyYjI?session_token=08a83587-a7bf-4281-8941-cfe091c040e0&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww&q=${estaciName}&types=poi&bbox=0.15,40.5,3.5,42.8`;
 
+    //la 1a
     //const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${normalizedName}.json?bbox=${bbox}&limit=7&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`;
 
 
