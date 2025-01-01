@@ -140,26 +140,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
     this.getCoordSubs = this.placesService.getCoordinates(estaci).subscribe({
       next: (data) => {
         // console.log(data.features[0].center);
-         console.log(data)
+         console.log(data.features[0].geometry.coordinates)
         //let coordinates = data.features[0].center;
 
 
-       // let coordinates: [number, number];
-        // coordinates = data.features[0].center;
+       let coordinates: [number, number];
+        coordinates = data.features[0].geometry.coordinates;
 
+       if(coordinates.length > 0){
+        this.location_estations[estaci] = coordinates;
+       }
 
-
-        // Verificar si es "Vilanova de Sau" y usar el center de la posición 2
-       // if ( data.features.length > 2) {
-        //  this.location_estations[estaci] = coordinates;
-       //}
-
-
-
-
-       // console.log(this.location_estations[estaci])
-       // this.flyTo(coordinates, estaci)
-       // this.addMarker(coordinates, estaci)
+       this.flyTo(coordinates, estaci)
+       this.addMarker(coordinates, estaci)
 
       },
 
