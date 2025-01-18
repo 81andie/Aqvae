@@ -22,7 +22,7 @@ export class LanguageService {
   }
 
   getLanguage(): string {
-    return this.translate.currentLang || 'en';
+    return this.translate.currentLang || 'ca';
   }
 
 

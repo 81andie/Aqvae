@@ -18,14 +18,12 @@ export class SpeciesStoryComponent implements OnInit, OnDestroy {
 
   constructor(private placeService: PlacesService,
 
-              private translate: TranslateService
+             
   ) { }
 
   ngOnInit(): void {
     this.getSpecies();
-    this.translate.use('ca');
-    this.translate.use('es');
-    this.translate.use('en')
+
 
   }
   ngOnDestroy(): void {

@@ -18,7 +18,8 @@ const combinedProviders = [
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
+      },
+
     })
   ),
 
