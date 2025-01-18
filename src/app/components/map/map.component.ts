@@ -139,7 +139,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
     this.getCoordSubs = this.placesService.getCoordinates(estaci).subscribe({
       next: (data) => {
-        // console.log(data.features[0].center);
+        console.log(data.features[0].center);
          console.log(data.features[0].geometry.coordinates)
         //let coordinates = data.features[0].center;
 

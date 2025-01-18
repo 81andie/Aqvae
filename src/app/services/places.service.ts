@@ -62,10 +62,14 @@ export class PlacesService {
 
     return this.http.get<any>(apiUrl).pipe(
       switchMap((response)=>{
+        console.log(response.suggestions[1])
         if(response.suggestions && response.suggestions.length > 0){
+
           const mapboxId = response.suggestions[0].mapbox_id;
+          console.log(mapboxId)
           const retrieveUrl = `https://api.mapbox.com/search/searchbox/v1/retrieve/${mapboxId}?session_token=0a25bd47-95aa-46e1-8942-33c8b9201e34&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww&`;
-         return this.http.get<any>(retrieveUrl);
+          console.log(retrieveUrl)
+          return this.http.get<any>(retrieveUrl);
         }else{
           return throwError(() => new Error('No se encontraron resultados'));
         }
