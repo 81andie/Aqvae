@@ -1,5 +1,5 @@
 
-<div class="language-selector flex-col md:flex-row lg:flex-row justify-center gap-1 p-1 ">
+<div class="language-selector text-right md:text-center lg:text-center flex-col md:flex-row lg:flex-row  gap-1 p-1 ">
   <button *ngFor="let language of languages"
           [ngClass]="{'active': currentLanguage === language.code}"
           (click)="switchLanguage(language.code)"
