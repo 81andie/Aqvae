@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, map, Observable, switchMap, tap, throwError } from "rxjs";
-import { Estaci, Features } from '../interfaces/features.interface';
+import { Estaci, Features, } from '../interfaces/features.interface';
 import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable({
@@ -13,6 +13,7 @@ export class PlacesService {
 
   public estacions: Features[] = [];
   public estaciName: string[] = [];
+
 
   private apiUrl = "https://analisi.transparenciacatalunya.cat/resource/gn9e-3qhr.json";
 
@@ -62,13 +63,21 @@ export class PlacesService {
 
     return this.http.get<any>(apiUrl).pipe(
       switchMap((response)=>{
-        console.log(response.suggestions[1])
+
+       console.log(response.suggestions)
+
         if(response.suggestions && response.suggestions.length > 0){
 
-          const mapboxId = response.suggestions[0].mapbox_id;
-          console.log(mapboxId)
+          const pantanoSuggestions = response.suggestions.filter((id: any) =>
+            /Pantà de|Presa de/i.test(id.name)
+          );
+
+          console.log(pantanoSuggestions)
+
+          const mapboxId = pantanoSuggestions[0].mapbox_id;
+          //console.log(mapboxId)
           const retrieveUrl = `https://api.mapbox.com/search/searchbox/v1/retrieve/${mapboxId}?session_token=0a25bd47-95aa-46e1-8942-33c8b9201e34&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww&`;
-          console.log(retrieveUrl)
+         // console.log(retrieveUrl)
           return this.http.get<any>(retrieveUrl);
         }else{
           return throwError(() => new Error('No se encontraron resultados'));
@@ -145,3 +154,7 @@ export class PlacesService {
 
 
 }
+function includes(arg0: string): any {
+  throw new Error("Function not implemented.");
+}
+
