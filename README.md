@@ -1,7 +1,8 @@
 
 # Claustrum Aqvae
 # Medición del estado de los Pantanos de Cataluña
-![macbook-subtle-turn](https://github.com/user-attachments/assets/db9b641a-6587-43ce-8ccf-d008846431f7)
+![macbook-subtle-turn (1)](https://github.com/user-attachments/assets/21425d24-78d8-4328-99d3-2777f8ad3a66)
+
 
 
 
