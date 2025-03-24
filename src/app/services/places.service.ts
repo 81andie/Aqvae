@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, map, Observable,  tap } from "rxjs";
 import { Estaci, Features } from '../interfaces/features.interface';
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class PlacesService {
 
   public estacions: Features[] = [];
   public estaciName: string[] = [];
+
 
   private apiUrl = "https://analisi.transparenciacatalunya.cat/resource/gn9e-3qhr.json";
 
@@ -46,7 +48,7 @@ export class PlacesService {
   }
 
   getCoordinates(estaciName: string): Observable<any> {
-    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`;
+    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=${environment.apiKey}`;
     return this.http.get<any>(apiUrl);
   }
 
