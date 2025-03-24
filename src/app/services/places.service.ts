@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, map, Observable, switchMap, tap, throwError } from "rxjs";
 import { Estaci, Features, } from '../interfaces/features.interface';
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -47,43 +48,8 @@ export class PlacesService {
   }
 
   getCoordinates(estaciName: string): Observable<any> {
-    const normalizedName = estaciName.startsWith('Pantà de')
-    ? estaciName
-    : estaciName.replace(/^Embassament de /, 'Pantà de ');
-
-
-    const bbox = '0.15,40.5,3.5,42.8';
-    //esta no funciona bien
-    //const apiUrl = `https://api.mapbox.com/search/searchbox/v1/retrieve/dXJuOm1ieHBvaTplMDY1ZWY5Ni1hNDRhLTRkMTItYTViMy1hYjEwNTI0NTQyYjI?session_token=08a83587-a7bf-4281-8941-cfe091c040e0&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww&q=${estaciName}&types=poi&bbox=0.15,40.5,3.5,42.8`;
-
-    //la 1a
-    //const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${normalizedName}.json?limit=7&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`;
-
-    const apiUrl = `https://api.mapbox.com/search/searchbox/v1/suggest?q=${normalizedName}&language=es&proximity=-73.990593,40.740121&types=poi&session_token=0a25bd47-95aa-46e1-8942-33c8b9201e34&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`
-
-    return this.http.get<any>(apiUrl).pipe(
-      switchMap((response)=>{
-
-       console.log(response.suggestions)
-
-        if(response.suggestions && response.suggestions.length > 0){
-
-          const pantanoSuggestions = response.suggestions.filter((id: any) =>
-            /Pantà de|Presa de/i.test(id.name)
-          );
-
-          console.log(pantanoSuggestions)
-
-          const mapboxId = pantanoSuggestions[0].mapbox_id;
-          //console.log(mapboxId)
-          const retrieveUrl = `https://api.mapbox.com/search/searchbox/v1/retrieve/${mapboxId}?session_token=0a25bd47-95aa-46e1-8942-33c8b9201e34&access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww&`;
-         // console.log(retrieveUrl)
-          return this.http.get<any>(retrieveUrl);
-        }else{
-          return throwError(() => new Error('No se encontraron resultados'));
-        }
-      })
-    );
+    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=${environment.apiKey}`;
+    return this.http.get<any>(apiUrl);
   }
 
   getUniqueDates(): Observable<string[]> {
