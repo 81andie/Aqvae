@@ -1,8 +1,9 @@
 
 # Claustrum Aqvae
 # Medición del estado de los Pantanos de Cataluña
+![macbook-subtle-turn](https://github.com/user-attachments/assets/db9b641a-6587-43ce-8ccf-d008846431f7)
 
-![Galaxy-Fold2-81andie github io (10)](https://github.com/user-attachments/assets/22f2f7c6-2c7a-406e-add4-dd6ebd96d8f4)
+
 
 Este proyecto ha sido desarrollado con  [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
 
