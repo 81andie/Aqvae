@@ -15,9 +15,22 @@ Antes de ejecutar este proyecto, asegúrate de tener instalado:
 - **npm** (gestor de paquetes de Node.js)
 - **Angular CLI** (puedes instalarlo globalmente con `npm install -g @angular/cli`)
 
-## Clona el proyecto
+## 🚀 Instalación y ejecución
 
-```https://github.com/81andie/Aqvae.git```
+### 1️⃣ Clonar el repositorio  
+```bash
+git clone https://github.com/tu-usuario/Aqvae.git
+cd Aqvae
+
+```
+
+### Ejecutar en modo desarrollo
+
+```bash
+ng serve
+
+```
+
 
 
 
