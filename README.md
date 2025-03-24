@@ -1,5 +1,5 @@
 
-# Claustrum Aqvae
+#  🌊 Claustrum Aqvae
 # Medición del estado de los Pantanos de Cataluña
 ![macbook-subtle-turn (1)](https://github.com/user-attachments/assets/21425d24-78d8-4328-99d3-2777f8ad3a66)
 
@@ -11,12 +11,11 @@ Este proyecto permite visualizar información sobre los pantanos de Cataluña, i
 ## Requisitos
 Antes de ejecutar este proyecto, asegúrate de tener instalado:
 
-Node.js (recomendado la versión 18.x o superior)
+- **Node.js** (recomendado la versión 18.x o superior)
+- **npm** (gestor de paquetes de Node.js)
+- **Angular CLI** (puedes instalarlo globalmente con `npm install -g @angular/cli`)
 
-npm (gestor de paquetes de Node.js)
-
-Angular CLI (puedes instalarlo globalmente con npm install -g @angular/cli)
-
+## Clona el proyecto
 
 
 
