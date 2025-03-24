@@ -3,6 +3,8 @@
 
 Este proyecto ha sido desarrollado con  [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
 
+Este proyecto permite visualizar información sobre los pantanos de Cataluña, incluyendo datos  de información sobre la sequía, el nivel de agua, y especies en peligro de extinción que habitan en estos embalses y consejos en la concienciación para ahorrar agua.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
