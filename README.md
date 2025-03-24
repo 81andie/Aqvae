@@ -1,6 +1,7 @@
-# Aqvae
+# Claustrum Aqvae
+# Medición del estado de los Pantanos de Cataluña
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+Este proyecto ha sido desarrollado con  [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
 
 ## Development server
 
