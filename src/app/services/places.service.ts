@@ -48,7 +48,10 @@ export class PlacesService {
   }
 
   getCoordinates(estaciName: string): Observable<any> {
+
     const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=${environment.apiKey}`;
+    console.log(apiUrl)
+
     return this.http.get<any>(apiUrl);
   }
 
