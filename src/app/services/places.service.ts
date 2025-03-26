@@ -10,6 +10,8 @@ import { environment } from '../../environments/environment';
 
 export class PlacesService {
 
+  private key = environment.apiKey;
+
 
 
   public estacions: Features[] = [];
@@ -48,7 +50,7 @@ export class PlacesService {
   }
 
   getCoordinates(estaciName: string): Observable<any> {
-    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=${environment.apiKey}`;
+    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`;
     return this.http.get<any>(apiUrl);
   }
 
