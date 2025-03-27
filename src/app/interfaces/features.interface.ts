@@ -22,5 +22,4 @@ export enum Estaci {
 export interface embalse{
   coordinates: number[][];
   name:string
-
 }

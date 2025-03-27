@@ -1,12 +1,7 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from "@angular/core";
-<<<<<<< HEAD
-import { BehaviorSubject, map, Observable, switchMap, tap, throwError } from "rxjs";
-import { Estaci, Features, } from '../interfaces/features.interface';
-=======
 import { BehaviorSubject, map, Observable, tap } from "rxjs";
 import { Estaci, Features } from '../interfaces/features.interface';
->>>>>>> master
 import { HttpClient, HttpParams } from "@angular/common/http";
 
 
@@ -15,8 +10,6 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 })
 
 export class PlacesService {
-
-  private key = environment.apiKey;
 
 
 
@@ -56,14 +49,7 @@ export class PlacesService {
     );
   }
 
-<<<<<<< HEAD
-  getCoordinates(estaciName: string): Observable<any> {
-    const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(estaciName)}.json?access_token=pk.eyJ1IjoiZWhlcm5hbmRlem5leHVzIiwiYSI6ImNtMXFseTQ2cDAxYnQyanF3ZThjNzVzbHIifQ.2V25gfCVjfaX98ErvQyzww`;
-    return this.http.get<any>(apiUrl);
-  }
-=======
- 
->>>>>>> master
+
 
   getUniqueDates(): Observable<string[]> {
 
@@ -124,19 +110,5 @@ export class PlacesService {
   getSpeciesData(): Observable<any> {
     return this.http.get<any[]>('assets/species-data.json')
   }
-<<<<<<< HEAD
-
-
-
-
-
-
-
-=======
->>>>>>> master
 
 }
-function includes(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
