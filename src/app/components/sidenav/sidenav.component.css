@@ -67,10 +67,11 @@
 
 .sidenav {
   position: fixed;
+
   bottom: 0;
   left: 0;
   width: 100%;
-  transform: translateY(87%);
+  transform: translateY(89%);
   transition: transform 0.5s ease-in-out;
   background-color: #f0f0f0;
   overflow: hidden;
@@ -89,7 +90,7 @@
 }
 
 .estaci{
- 
+
   color: rgb(14, 14, 110);
 
 }
