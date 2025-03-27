@@ -4,7 +4,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { SidenavComponent } from "../sidenav/sidenav.component";
 import { Map, Popup, Marker } from 'mapbox-gl';
 import { environment } from '../../../environments/environment';
-import { Estaci, Features } from '../../interfaces/features.interface';
+import { embalse, Estaci, Features } from '../../interfaces/features.interface';
 import { PlacesService } from '../../services/places.service';
 import { SelectorsComponent } from "../selectors/selectors.component";
 import { SliderTransitionComponent } from '../slider-transition/slider-transition.component';
@@ -29,7 +29,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
   private map!: Map;
   public estacions: Features[] = [];
   public estaciName: string[] = [];
-  public markers: { coordinates: [number, number]; name: string }[] = [];
+  //public markers: { coordinates: [number, number]; name: string }[] = [];
   public measurements: any[] = [];
 
   private getEstaciSubs!: Subscription;
@@ -39,6 +39,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
 
   isCoverPageVisible = true;
+
+
 
 
   @ViewChild('mapDiv') mapDivElement!: ElementRef
@@ -64,7 +66,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.center()
+  this.center()
+
   }
 
   isVisible() {
@@ -96,12 +99,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
         style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
         // style: 'mapbox://styles/mapbox/standard',
         center: [2.833944, 41.977247],// starting position [lng, lat]
-        zoom: 12,
+        zoom: 1,
         projection: 'globe',
         accessToken: environment.apiKey,
       });
 
       this.map.setCenter([2.833944, 41.977247]);
+      this.addAllMarkers()
 
     } else {
       console.error('mapDivElement no esta disponivle')
@@ -115,7 +119,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
         this.estaciName = estaci; // Asigna la lista filtrada a la propiedad del componente
         // console.log(this.estaciName);
         this.estaciName.forEach(estaci => {
-          this.getCoordinates(estaci);
+
         });
       },
       error: (err) => console.error('Error al obtener datos:', err)
@@ -124,87 +128,118 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy{
 
   public location_estations: any = {};
 
-  getCoordinates(estaci: string) {
 
-    if(this.location_estations[estaci]){
-      let coordinates = this.location_estations[estaci];
-      this.flyTo(coordinates, estaci);
-      this.addMarker(coordinates, estaci);
-      return;
+  public embalses:{ name: string; coordinates: [number, number] }[] = [
+    {
+      name: "Embassament de Sau (Vilanova de Sau)",
+      coordinates: [2.38292, 41.97466]
+    },
+    {
+      name: "Embassament de Susqueda (Osor)",
+      coordinates: [2.51527, 41.9755]
+    },
+    {
+      name: "Embassament de la Baells (Cercs)",
+      coordinates: [1.87558, 42.13286]
+    },
+    {
+      name: "Embassament de Sant Ponç (Clariana de Cardener)",
+      coordinates: [1.60245, 41.96964]
+    },
+    {
+      name: "Embassament de la Llosa del Cavall (Navès)",
+      coordinates: [1.6022, 42.120711]
+    },
+    {
+      name: "Embassament de Foix (Castellet i la Gornal)",
+      coordinates: [1.63996, 41.25901]
+    },
+    {
+      name: "Embassament de Siurana (Cornudella de Montsant)",
+      coordinates: [0.91597, 41.25084]
+    },
+    {
+      name: "Embassament de Riudecanyes",
+      coordinates: [0.95340, 41.13547]
+    },
+    {
+      name: "Embassament de Darnius Boadella (Darnius)",
+      coordinates: [2.82324, 42.34975]
     }
-
-    this.getCoordSubs = this.placesService.getCoordinates(estaci).subscribe({
-      next: (data) => {
-        // console.log(data.features[0].center);
-        // console.log(data)
-        //let coordinates = data.features[0].center;
+  ];
 
 
-        let coordinates: [number, number];
+  addMarker(embalse:{name:string; coordinates:[number,number]}) {
 
-        // Verificar si es "Vilanova de Sau" y usar el center de la posición 2
-        if (estaci.toLowerCase().includes("vilanova de sau") && data.features.length > 2) {
-          coordinates = data.features[2].center;
-          //console.log('Usando coordenadas de features[2] para Vilanova de Sau:', coordinates);
-        } else {
-          // Para los demás, usar el center de la posición 0
-          coordinates = data.features[0].center;
-          // console.log('Usando coordenadas de features[0]:', coordinates);
-        }
-
-        this.location_estations[estaci] = coordinates;
-
-        this.flyTo(coordinates, estaci)
-
-        this.addMarker(coordinates, estaci)
-
-      },
-
-      error: (err) => console.error('Error al obtener datos:', err)
-    });
-  }
-
-
-  addMarker(coordinates: [number, number], name: string) {
     const marker = new Marker()
-      .setLngLat(coordinates)
-      .setPopup(new Popup().setHTML(`<h3>${name}</h3>`))
+      .setLngLat(embalse.coordinates)
+      .setPopup(new Popup().setText(embalse.name))
       .addTo(this.map);
 
-    marker.getElement().addEventListener('click', () => {
-      this.flyTo(coordinates, name);  // Llama a flyTo al hacer clic en el marcador
-    });
+      marker.getElement().addEventListener('click', () => {
+        this.flyTo(embalse.coordinates, embalse.name);
+
+      });
+
   }
 
+
+  addAllMarkers() {
+   this.embalses.forEach(embalse =>{
+    this.addMarker(embalse)
+    console.log(embalse)
+   })
+  }
+
+
   flyTo(coordinates: [number, number], name: string) {
+
     this.map.flyTo({
       zoom: 14,
       center: coordinates,
-      speed: 0.6,    // Velocidad del vuelo (ajustable)
-      curve: 1.9,    // Curva del vuelo para hacerlo más suave
+      speed: 0.7,
+      curve: 1.9,
       essential: true
     })
   }
 
-
   center() {
-   this.getCenterSubs = this.placesService.measurements$.subscribe(measurements => {
-      this.measurements = measurements;
+    this.getCenterSubs = this.placesService.measurements$.subscribe(measurements => {
+       this.measurements = measurements;
 
-      if (this.measurements.length > 0) {
-        console.log('Mediciones en map:', this.measurements)
-        const selectedMeasurement = this.measurements[0];
-        const name = selectedMeasurement.estaci;
-        console.log(name);
+       if (this.measurements.length > 0) {
+         console.log('Mediciones en map:', this.measurements)
+         const selectedMeasurement = this.measurements[0];
+         const name = selectedMeasurement.estaci;
+         console.log(name);
 
-        if (name) {
-          this.getCoordinates(name);
-        }
-      }
+         const coordinates = this.embalses.forEach((el=>{
+          console.log(el)
+          if (name === el.name) {
+           this.flyTo(el.coordinates,el.name)
+          }
 
-    })
+         }))
 
-  }
+
+
+
+       }
+
+     })
+
+   }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
