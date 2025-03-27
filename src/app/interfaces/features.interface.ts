@@ -17,3 +17,10 @@ export enum Estaci {
   EmbassamentDeSiuranaCornudellaDeMontsant = "Embassament de Siurana (Cornudella de Montsant)",
   EmbassamentDeSusquedaOsor = "Embassament de Susqueda (Osor)",
 }
+
+
+export interface embalse{
+  coordinates: number[][];
+  name:string
+
+}
