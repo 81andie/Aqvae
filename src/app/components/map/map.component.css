@@ -13,10 +13,7 @@
  position: absolute;
  z-index: 0;
 
-
-
-
-
+  overflow: hidden;
 }
 
 .prueba{
@@ -24,10 +21,7 @@
  z-index: 100;
 
 }
-.overlay{
-  position: relative;
 
-}
 
 .title1,.title2{
   text-shadow: 2px 3px darkblue;
